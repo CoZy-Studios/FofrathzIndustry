@@ -4,7 +4,7 @@ public enum TileType
 {
     Grass,
     //Stone,
-    //Copper,
+    Copper,
     //Iron,
     Coal
 }
