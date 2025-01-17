@@ -9,8 +9,12 @@ public class Main
         GamePanel gamePanel = new GamePanel();
         JFrame gameWindow = new JFrame();
 
+        Insets insets = gameWindow.getInsets();
+        int width = gamePanel.width + gamePanel.columns +1 ;
+        int height = gamePanel.height + gamePanel.cellSize + 6;
+
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameWindow.setSize(1920,1080);  //final size / resize-ability is up to debate
+        gameWindow.setSize(width ,height);  //final size / resize-ability is up to debate
         gameWindow.setTitle("FofrathzIndustry");
         gameWindow.setResizable(false); // Not resizeable for now, until we know how to stop it from stretching things
         gameWindow.setLocationRelativeTo(null);
