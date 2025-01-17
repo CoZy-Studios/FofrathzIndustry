@@ -33,16 +33,17 @@ public class Grid
     public void drawGrid(Graphics2D g2)
     {
         //populateGrid(g2);
-        g2.setColor(Color.BLACK);
+
         for(int i= 0; i <= rows; i++)
         {
             for(int j = 0; j <= columns; j++)
             {
+                g2.setColor(Color.BLACK);
                 g2.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
 
                 if(0 < i && i < 17 && 0 < j && j < 17 )
                 {
-                    localGrid[i][j].initialize(g2);
+                    localGrid[i][j].initialize(g2, this, i, j);
                 }
 
             }
@@ -59,10 +60,14 @@ public class Grid
                 //colorRandomizer(g2); // for experimentation purposes
                 greenRandomizer(g2);
                 g2.fillRect(j * cellSize + 1, i * cellSize + 1, cellSize - 1, cellSize - 1 );
-
-
             }
         }
+    }
+
+    protected void drawTile(Graphics2D g2, int positionX, int positionY)
+    {
+        greenRandomizer(g2);
+        g2.fillRect((positionX - 1) * cellSize + 1, (positionY - 1) * cellSize + 1, cellSize - 1, cellSize - 1);
     }
 
     private void colorRandomizer(Graphics2D g2)
@@ -77,7 +82,7 @@ public class Grid
         g2.setColor(randomColor);
     }
 
-    private void greenRandomizer(Graphics2D g2)
+    protected void greenRandomizer(Graphics2D g2)
     {
         Random randomize = new Random();
         float red = randomize.nextFloat() / 10f;

@@ -9,9 +9,11 @@ public class Tile
     //int buildingTileTextureID;
     int ID;
 
-    public void initialize(Graphics2D g2)
+    public void initialize(Graphics2D g2, Grid parentGrid, int gridPositionX, int gridPositionY)
     {
         System.out.println("tile initialized");
+
+        parentGrid.drawTile(g2 ,gridPositionX ,gridPositionY);
     }
 
 }
