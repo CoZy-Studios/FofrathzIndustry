@@ -16,7 +16,7 @@ public class Grid
         {
             for (int j = 1; j <= columns; j++)
             {
-                localGrid[i][j] = new Tile();
+                localGrid[i][j] = new Tile(TileType.Grass);
             }
         }
 
@@ -58,17 +58,12 @@ public class Grid
             for(int j = 0; j <= columns; j++)
             {
                 //colorRandomizer(g2); // for experimentation purposes
-                greenRandomizer(g2);
                 g2.fillRect(j * cellSize + 1, i * cellSize + 1, cellSize - 1, cellSize - 1 );
             }
         }
     }
 
-    protected void drawTile(Graphics2D g2, int positionX, int positionY)
-    {
-        greenRandomizer(g2);
-        g2.fillRect((positionX - 1) * cellSize + 1, (positionY - 1) * cellSize + 1, cellSize - 1, cellSize - 1);
-    }
+
 
     private void colorRandomizer(Graphics2D g2)
     {
@@ -82,19 +77,6 @@ public class Grid
         g2.setColor(randomColor);
     }
 
-    protected void greenRandomizer(Graphics2D g2)
-    {
-        Random randomize = new Random();
-        float red = randomize.nextFloat() / 10f;
 
-        float green = randomize.nextFloat() + 0.25f ;
-        if(green > 1f) green = 1f;
-
-        float blue = randomize.nextFloat() / 10f;
-
-        Color randomColor = new Color(red, green, blue);
-
-        g2.setColor(randomColor);
-    }
 
 }
