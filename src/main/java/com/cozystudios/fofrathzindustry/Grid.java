@@ -1,5 +1,5 @@
 package com.cozystudios.fofrathzindustry;
-
+import java.util.Random;
 import java.awt.*;
 
 public class Grid
@@ -39,9 +39,38 @@ public class Grid
         {
             for(int j = 0; j <= columns; j++)
             {
-
+                //colorRandomizer(g2); // for experimentation purposes
+                greenRandomizer(g2);
                 g2.fillRect(j * cellSize + 1, i * cellSize + 1, cellSize - 1, cellSize - 1 );
             }
         }
     }
+
+    private void colorRandomizer(Graphics2D g2)
+    {
+        Random randomize = new Random();
+        float red = randomize.nextFloat();
+        float green = randomize.nextFloat();
+        float blue = randomize.nextFloat();
+
+        Color randomColor = new Color(red, green, blue);
+
+        g2.setColor(randomColor);
+    }
+
+    private void greenRandomizer(Graphics2D g2)
+    {
+        Random randomize = new Random();
+        float red = randomize.nextFloat() / 10f;
+
+        float green = randomize.nextFloat() + 0.25f ;
+        if(green > 1f) green = 1f;
+
+        float blue = randomize.nextFloat() / 10f;
+
+        Color randomColor = new Color(red, green, blue);
+
+        g2.setColor(randomColor);
+    }
+
 }
