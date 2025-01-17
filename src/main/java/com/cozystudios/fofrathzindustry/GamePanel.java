@@ -5,11 +5,12 @@ import java.awt.*;
 
 public class GamePanel extends JPanel
 {
-    int columns =  16;
-    int rows = 16;
-    int cellSize = 34;
-    int width = columns * cellSize;
-    int height = rows * cellSize;
+    Grid grid;
+
+    public GamePanel(Grid pGrid)
+    {
+        grid = pGrid;
+    }
 
     public void paintComponent(Graphics g)
     {
@@ -32,17 +33,6 @@ public class GamePanel extends JPanel
             g2.drawLine(x, 0, x, height);
         }*/
 
-        drawGrid(g2);
-    }
-
-    private void drawGrid(Graphics2D g2)
-    {
-        for(int i= 0; i <= rows; i++)
-        {
-            for(int j = 0; j <= columns; j++)
-            {
-                g2.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
-            }
-        }
+        grid.drawGrid(g2);
     }
 }

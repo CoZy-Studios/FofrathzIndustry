@@ -6,11 +6,12 @@ public class Main
 {
     public static void main(String[] args)
     {
-        GamePanel gamePanel = new GamePanel();
         JFrame gameWindow = new JFrame();
+        Grid grid = new Grid();
+        GamePanel gamePanel = new GamePanel(grid);
 
-        int width = gamePanel.width + gamePanel.columns + 1;
-        int height = gamePanel.height + gamePanel.cellSize + 6;
+        int width = grid.width + grid.columns + 1;
+        int height = grid.height + grid.cellSize + 6;
 
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setSize(width, height);  //final size / resize-ability is up to debate
