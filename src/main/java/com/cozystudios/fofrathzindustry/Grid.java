@@ -21,7 +21,8 @@ public class Grid
 
     public void drawGrid(Graphics2D g2)
     {
-        //populateGrid(g2);
+        populateGrid(g2);
+        g2.setColor(Color.BLACK);
         for(int i= 0; i <= rows; i++)
         {
             for(int j = 0; j <= columns; j++)
@@ -33,12 +34,13 @@ public class Grid
 
     public void populateGrid(Graphics2D g2)
     {
+        g2.setColor(Color.GREEN);
         for(int i= 0; i <= rows; i++)
         {
             for(int j = 0; j <= columns; j++)
             {
-                g2.setColor(Color.GREEN);
-                g2.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
+
+                g2.fillRect(j * cellSize + 1, i * cellSize + 1, cellSize - 1, cellSize - 1 );
             }
         }
     }
