@@ -12,10 +12,11 @@ Progress:
 - color (randomized to be less monotonous) for the tiles
 
 19/91/25
-- R began at 13:00
+- R began at 13:00, took a break 14:30
 
 - cleaned up some code
 - added procedural map generation
 - fixed some minor (skill) issues
 - prevented colors from getting rerandomized when the window leaves the screen
 - added copper color
+- tried rendering building Sprites
