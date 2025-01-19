@@ -9,7 +9,7 @@ public class Grid
     static int cellSize = 34;
     int width = columns * cellSize;
     int height = rows * cellSize;
-    public Tile[][] localGrid = new Tile[rows + 1][columns + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
+    public Tile[][] localGrid = new Tile[columns + 1][rows + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
 
     FastNoiseLite mapNoise = new FastNoiseLite();
 
@@ -35,7 +35,7 @@ public class Grid
         {
             for (int j = 1; j <= columns; j++)
             {
-                localGrid[i][j] = new Tile();
+                localGrid[j][i] = new Tile();
             }
         }
     }
@@ -51,13 +51,13 @@ public class Grid
 
                 if(0 < i && i <= rows && 0 < j && j <= columns)
                 {
-                    float noiseValue = mapNoise.GetNoise(i * 50, j * 50);
+                    float noiseValue = mapNoise.GetNoise(j * 50, i * 50);
                     if(noiseValue > 0.95)
-                        localGrid[i][j].initialize(TileType.Coal, g2, i, j);
+                        localGrid[j][i].initialize(TileType.Coal, g2, j, i);
                     else if(noiseValue < -0.98)
-                        localGrid[i][j].initialize(TileType.Copper, g2, i, j);
+                        localGrid[j][i].initialize(TileType.Copper, g2, j, i);
                     else
-                        localGrid[i][j].initialize(TileType.Grass, g2, i, j);
+                        localGrid[j][i].initialize(TileType.Grass, g2, j, i);
                 }
             }
         }
