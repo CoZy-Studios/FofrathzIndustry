@@ -1,0 +1,17 @@
+Writing down time spent coding, because why not
+
+17/01/25
+- R coding time 6h , 30min (5h 30min if distractions are subtracted)
+
+
+Progress:
+- Made the window
+- created a grid
+- tiles
+- tile types exist now
+- color (randomized to be less monotonous) for the tiles
+
+19/91/25
+- cleaned up some code
+- added procedural map generation
+- fixed some minor (skill) issues
