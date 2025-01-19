@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Building extends Tile
 {
@@ -20,7 +21,7 @@ public class Building extends Tile
     {
         try
         {
-            testBuilding = ImageIO.read(getClass().getResourceAsStream("/BuildingTest.png"));
+            testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTest.png")));
         }catch (IOException e)
         {
             e.printStackTrace();
