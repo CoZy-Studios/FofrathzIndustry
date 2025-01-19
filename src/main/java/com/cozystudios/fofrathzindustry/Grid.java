@@ -54,7 +54,7 @@ public class Grid
                     float noiseValue = mapNoise.GetNoise(i * 50, j * 50);
                     if(noiseValue > 0.95)
                         localGrid[i][j].initialize(TileType.Coal, g2, i, j);
-                    else if(noiseValue < 0.95 && noiseValue > 0.85)
+                    else if(noiseValue < -0.98)
                         localGrid[i][j].initialize(TileType.Copper, g2, i, j);
                     else
                         localGrid[i][j].initialize(TileType.Grass, g2, i, j);
