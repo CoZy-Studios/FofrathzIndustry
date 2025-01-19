@@ -1,7 +1,6 @@
 package com.cozystudios.fofrathzindustry;
 
 import java.awt.*;
-import java.util.Random;
 
 import static com.cozystudios.fofrathzindustry.ColorHelper.*;
 
@@ -22,8 +21,9 @@ public class Tile
 
         switch(tileType)
         {
-            case Grass -> g2.setColor(greenRandomizer());
-            case Coal -> g2.setColor(blackRandomizer());
+            case Grass -> g2.setColor(grassRandomizer());
+            case Coal -> g2.setColor(coalRandomizer());
+            case Copper -> g2.setColor(copperRandomizer());
             default -> g2.setColor(Color.WHITE);
         }
         g2.fillRect((positionX - 1) * Grid.cellSize + 1, (positionY - 1) * Grid.cellSize + 1, Grid.cellSize - 1, Grid.cellSize - 1);
