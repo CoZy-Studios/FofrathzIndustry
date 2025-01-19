@@ -4,12 +4,12 @@ import java.awt.*;
 
 public class Grid
 {
-    int columns =  16;
+    int columns = 16;
     int rows = 16;
     static int cellSize = 34;
     int width = columns * cellSize;
     int height = rows * cellSize;
-    public Tile[][] localGrid = new Tile[rows + 1][columns + 1] ; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16
+    public Tile[][] localGrid = new Tile[rows + 1][columns + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16
 
     public Grid() {
         for(int i = 1; i <= rows; i++)
@@ -19,14 +19,15 @@ public class Grid
                 localGrid[i][j] = new Tile(TileType.Grass);
             }
         }
-
     }
 
-    public static int GridToCoord(int tileInt){
+    public static int GridToCoord(int tileInt)
+    {
         return (tileInt * cellSize) - cellSize;
     }
 
-    public static int CoordToGrid(int coordinate){
+    public static int CoordToGrid(int coordinate)
+    {
         return (int)Math.floor(coordinate / cellSize) + 1;
     }
 
@@ -41,11 +42,10 @@ public class Grid
                 g2.setColor(Color.BLACK);
                 g2.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
 
-                if(0 < i && i < 17 && 0 < j && j < 17 )
+                if(0 < i && i < rows + 1 && 0 < j && j < columns + 1)
                 {
                     localGrid[i][j].initialize(g2, this, i, j);
                 }
-
             }
         }
     }
@@ -62,21 +62,4 @@ public class Grid
             }
         }
     }
-
-
-
-    private void colorRandomizer(Graphics2D g2)
-    {
-        Random randomize = new Random();
-        float red = randomize.nextFloat();
-        float green = randomize.nextFloat();
-        float blue = randomize.nextFloat();
-
-        Color randomColor = new Color(red, green, blue);
-
-        g2.setColor(randomColor);
-    }
-
-
-
 }

@@ -3,13 +3,11 @@ package com.cozystudios.fofrathzindustry;
 import java.awt.*;
 import java.util.Random;
 
-//parent class to Local /
+import static com.cozystudios.fofrathzindustry.ColorHelper.*;
+
 public class Tile
 {
     private TileType tileType;
-
-
-
     int ID;
 
     public Tile(TileType type)
@@ -29,8 +27,8 @@ public class Tile
 
         switch(tileType)
         {
-            case Grass -> greenRandomizer(g2);
-            case Coal -> blackRandomizer(g2);
+            case Grass -> g2.setColor(greenRandomizer());
+            case Coal -> g2.setColor(blackRandomizer());
             default -> g2.setColor(Color.WHITE);
         }
         g2.fillRect((positionX - 1) * Grid.cellSize + 1, (positionY - 1) * Grid.cellSize + 1, Grid.cellSize - 1, Grid.cellSize - 1);
@@ -51,42 +49,11 @@ public class Tile
         }
         else if(tileRandomizerValue > 85)
         {
-            tileType = tileType.Copper;
+            tileType = TileType.Copper;
         }
         else
         {
-            throw new IllegalStateException("Unexpected value: " + tileRandomizerValue);
+            throw new IllegalStateException("Unexpected value in tileType randomizer: " + tileRandomizerValue);
         }
     }
-
-    private void greenRandomizer(Graphics2D g2)
-    {
-        Random randomize = new Random();
-        float red = randomize.nextFloat() / 10f;
-
-        float green = randomize.nextFloat() + 0.25f ;
-        if(green > 1f) green = 1f;
-
-        float blue = randomize.nextFloat() / 10f;
-
-        Color randomColor = new Color(red, green, blue);
-
-        g2.setColor(randomColor);
-    }
-    private void blackRandomizer(Graphics2D g2)
-    {
-        Random randomize = new Random();
-        float red = randomize.nextFloat() / 20f;
-
-        float green = randomize.nextFloat() /20f ;
-
-        float blue = randomize.nextFloat() / 20f;
-
-        Color randomColor = new Color(red, green, blue);
-
-        g2.setColor(randomColor);
-    }
-
-
-
 }
