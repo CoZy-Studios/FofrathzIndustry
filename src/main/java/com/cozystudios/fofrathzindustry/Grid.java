@@ -44,7 +44,7 @@ public class Grid
 
                 if(0 < i && i < rows + 1 && 0 < j && j < columns + 1)
                 {
-                    localGrid[i][j].initialize(g2, this, i, j);
+                    localGrid[i][j].initialize(g2, i, j);
                 }
             }
         }

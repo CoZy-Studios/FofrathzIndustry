@@ -15,7 +15,7 @@ public class Tile
         tileType = type;
     }
 
-    public void initialize(Graphics2D g2, Grid grid, int gridPositionX, int gridPositionY)
+    public void initialize(Graphics2D g2, int gridPositionX, int gridPositionY)
     {
         randomizeTileType();
         System.out.println("tile initialized, I am " + tileType);
