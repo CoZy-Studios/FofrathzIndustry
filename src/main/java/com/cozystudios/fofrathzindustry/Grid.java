@@ -1,5 +1,4 @@
 package com.cozystudios.fofrathzindustry;
-import java.util.Random;
 import java.awt.*;
 
 public class Grid
@@ -9,14 +8,16 @@ public class Grid
     static int cellSize = 34;
     int width = columns * cellSize;
     int height = rows * cellSize;
-    public Tile[][] localGrid = new Tile[rows + 1][columns + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16
+    public Tile[][] localGrid = new Tile[rows + 1][columns + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
+
+    FastNoiseLite mapNoise = new FastNoiseLite();
 
     public Grid() {
         for(int i = 1; i <= rows; i++)
         {
             for (int j = 1; j <= columns; j++)
             {
-                localGrid[i][j] = new Tile(TileType.Grass);
+                localGrid[i][j] = new Tile();
             }
         }
     }
@@ -33,8 +34,6 @@ public class Grid
 
     public void drawGrid(Graphics2D g2)
     {
-        //populateGrid(g2);
-
         for(int i= 0; i <= rows; i++)
         {
             for(int j = 0; j <= columns; j++)
@@ -44,21 +43,8 @@ public class Grid
 
                 if(0 < i && i < rows + 1 && 0 < j && j < columns + 1)
                 {
-                    localGrid[i][j].initialize(g2, i, j);
+                    localGrid[i][j].initialize(TileType.Grass, g2, i, j);
                 }
-            }
-        }
-    }
-
-    public void populateGrid(Graphics2D g2)
-    {
-        g2.setColor(Color.GREEN);
-        for(int i= 0; i <= rows; i++)
-        {
-            for(int j = 0; j <= columns; j++)
-            {
-                //colorRandomizer(g2); // for experimentation purposes
-                g2.fillRect(j * cellSize + 1, i * cellSize + 1, cellSize - 1, cellSize - 1 );
             }
         }
     }
