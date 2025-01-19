@@ -47,7 +47,7 @@ public class Grid
             for(int j = 0; j <= columns; j++)
             {
                 g2.setColor(Color.BLACK);
-                g2.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
+                g2.drawRect((j - 1) * cellSize, (i - 1) * cellSize, cellSize, cellSize);
 
                 if(0 < i && i <= rows && 0 < j && j <= columns)
                 {
