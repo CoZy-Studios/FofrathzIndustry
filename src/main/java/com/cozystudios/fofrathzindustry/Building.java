@@ -11,10 +11,23 @@ public class Building
     private final int cellSize = Grid.cellSize;
     private BufferedImage testBuilding;
     private BuildingType buildingType;
+    public int positionX;
+    public int positionY;
 
-    public void Initialize(BuildingType type)
+    public void initialize(BuildingType type, Graphics2D g2, int posX, int posY)
     {
         buildingType = type;
+        positionX = posX;
+        positionY = posY;
+        if(buildingType == BuildingType.Empty)
+        {
+            System.out.println("I am " + buildingType + " inside");
+        }
+        else
+        {
+            System.out.println("I am " + buildingType);
+        }
+        drawBuilding(g2);
     }
 
     public void getBuildingSprite()
@@ -28,10 +41,15 @@ public class Building
         }
     }
 
-    public void drawBuilding(Graphics2D g2, int gridPositionX, int gridPositionY)
+    public void drawBuilding(Graphics2D g2)
     {
-        int coordinatesX = gridPositionX * cellSize;
-        int coordinatesY = gridPositionY * cellSize;
-        g2.drawImage(testBuilding,coordinatesX, coordinatesY, cellSize, cellSize, null );
+        int coordinatesX = positionX * cellSize;
+        int coordinatesY = positionY * cellSize;
+
+        //TEST
+        g2.setColor(Color.white);
+        g2.drawString(buildingType.toString(), coordinatesX, coordinatesY);
+
+        //g2.drawImage(testBuilding,coordinatesX, coordinatesY, cellSize, cellSize, null );
     }
 }
