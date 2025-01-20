@@ -8,10 +8,8 @@ public class ColorHelper {
     {
         Random randomize = new Random();
         float red = randomize.nextFloat() / 10f;
-        float green = randomize.nextFloat() + 0.25f;
+        float green = randomize.nextFloat() * 0.3f + 0.6f;
         float blue = randomize.nextFloat() / 10f;
-
-        if(green > 1f) green = 1f;
 
         return new Color(red, green, blue);
     }
