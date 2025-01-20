@@ -43,12 +43,11 @@ public class Building
 
     public void drawBuilding(Graphics2D g2)
     {
-        int coordinatesX = positionX * cellSize;
-        int coordinatesY = positionY * cellSize;
-
         //TEST
         g2.setColor(Color.white);
-        g2.drawString(buildingType.toString(), coordinatesX, coordinatesY);
+        //g2.fillRect(Grid.GridToCoord(positionX), Grid.GridToCoord(positionY), cellSize - 2, cellSize - 2);
+        g2.drawString(buildingType.toString(), Grid.GridToCoord(positionX), Grid.GridToCoord(positionY));
+        System.out.println("i got drawn at " + positionX + ", " + positionY);
 
         //g2.drawImage(testBuilding,coordinatesX, coordinatesY, cellSize, cellSize, null );
     }
