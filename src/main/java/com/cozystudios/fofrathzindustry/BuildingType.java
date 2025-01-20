@@ -5,4 +5,5 @@ public enum BuildingType
     Extractor,
     Belt,
     Manufacturer,
+    Empty
 }

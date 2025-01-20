@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Building extends Tile
+public class Building
 {
     private final int cellSize = Grid.cellSize;
     private BufferedImage testBuilding;
