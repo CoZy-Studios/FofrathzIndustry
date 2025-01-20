@@ -48,7 +48,7 @@ public class Building
         //g2.fillRect(Grid.GridToCoord(positionX), Grid.GridToCoord(positionY), cellSize - 2, cellSize - 2);
         g2.drawString(buildingType.toString(), Grid.GridToCoord(positionX), Grid.GridToCoord(positionY));
         System.out.println("i got drawn at " + positionX + ", " + positionY);
-
-        //g2.drawImage(testBuilding,coordinatesX, coordinatesY, cellSize, cellSize, null );
+        getBuildingSprite();
+        g2.drawImage(testBuilding,Grid.GridToCoord(positionX), Grid.GridToCoord(positionY), cellSize, cellSize, null );
     }
 }
