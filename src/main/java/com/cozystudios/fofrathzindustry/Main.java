@@ -19,6 +19,12 @@ public class Main
         gameWindow.setResizable(false); // Not resizeable for now, until we know how to stop it from stretching things
         gameWindow.setLocationRelativeTo(null);
         gameWindow.setVisible(true);
-        gameWindow.add(gamePanel);
+
+        gameWindow.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gameWindow.add(gamePanel, gbc);
     }
 }
