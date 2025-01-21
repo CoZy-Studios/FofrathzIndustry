@@ -60,7 +60,16 @@ public class Grid
                         localGrid[j][i].initialize(TileType.Copper, g2, j, i);
                     else
                         localGrid[j][i].initialize(TileType.Grass, g2, j, i);
-                   localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i);
+                    //For testing purposes
+                    if(i == j)
+                    {
+                        localBuildings[j][i].initialize(BuildingType.Belt, g2, j, i);
+                    }
+                    else
+                    {
+                        localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i);
+                    }
+
                 }
             }
         }

@@ -26,8 +26,8 @@ public class Building
         else
         {
             System.out.println("I am " + buildingType);
+            drawBuilding(g2);
         }
-        drawBuilding(g2);
     }
 
     public void getBuildingSprite()
@@ -44,8 +44,8 @@ public class Building
     public void drawBuilding(Graphics2D g2)
     {
         //TEST
-        //g2.setColor(Color.white);
-        //g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY));
+        g2.setColor(Color.white);
+        g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY) + cellSize);
         System.out.println(buildingType + " got drawn at "+ positionX + ", " + positionY);
         getBuildingSprite();
         g2.drawImage(testBuilding,Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
