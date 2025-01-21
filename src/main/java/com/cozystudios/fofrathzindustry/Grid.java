@@ -11,7 +11,7 @@ public class Grid
     int height = rows * cellSize;
     public Tile[][] localGrid = new Tile[columns + 1][rows + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
     public Building[][] localBuildings = new Building[columns + 1][rows + 1];
-    boolean hasBeenGenerated = false;
+    boolean hasBeenGenerated;
 
     FastNoiseLite mapNoise = new FastNoiseLite();
 
@@ -27,7 +27,7 @@ public class Grid
 
     public Grid() {
         Random randomize = new Random();
-
+        hasBeenGenerated = false;
         mapNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
         mapNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.CellValue);
         mapNoise.SetFrequency(0.005f);
@@ -65,6 +65,6 @@ public class Grid
             }
         }
 
-        hasBeenGenerated = true;
+        //hasBeenGenerated = true;
     }
 }

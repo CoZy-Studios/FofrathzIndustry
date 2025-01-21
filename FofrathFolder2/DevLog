@@ -27,3 +27,8 @@ Progress:
 - fixed redundancies
 - implemented sprite loading
 - created Building grid (filled with empty buildings)
+
+21/1/25
+- R 10:00 - 10: 25
+
+- fixed Grid rendering, the "hasBeenGenerated" randomly breaks
