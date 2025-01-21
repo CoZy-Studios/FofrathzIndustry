@@ -15,14 +15,14 @@ public class Grid
 
     FastNoiseLite mapNoise = new FastNoiseLite();
 
-    public static int GridToCoord(int tileInt)
+    public static int GridToCoordinate(int tileInt)
     {
         return (tileInt * cellSize) - cellSize;
     }
 
-    public static int CoordToGrid(int coordinate)
+    public static int CoordinateToGrid(int coordinate)
     {
-        return (int)Math.floor(coordinate / cellSize) + 1;
+        return (int)Math.floor((double) coordinate / cellSize) + 1;
     }
 
     public Grid() {

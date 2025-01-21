@@ -8,7 +8,6 @@ public class Tile
 {
     private TileType tileType;
     private Color tileColor = Color.white;
-    int ID;
 
     public void initialize(TileType type, Graphics2D g2, int gridPositionX, int gridPositionY)
     {
@@ -31,6 +30,6 @@ public class Tile
     {
         g2.setColor(tileColor);
         g2.fillRect((positionX - 1) * Grid.cellSize + 1, (positionY - 1) * Grid.cellSize + 1, Grid.cellSize - 1, Grid.cellSize - 1);
-        System.out.println("drawn Tile");
+        System.out.println("drawn " + tileType + "-Tile");
     }
 }

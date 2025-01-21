@@ -35,20 +35,19 @@ public class Building
         try
         {
             testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTest.png")));
-        }catch (IOException e)
+        }catch (IOException ignored)
         {
-            e.printStackTrace();
+            System.out.println("could not get building sprite");
         }
     }
 
     public void drawBuilding(Graphics2D g2)
     {
         //TEST
-        g2.setColor(Color.white);
-        //g2.fillRect(Grid.GridToCoord(positionX), Grid.GridToCoord(positionY), cellSize - 2, cellSize - 2);
-        g2.drawString(buildingType.toString(), Grid.GridToCoord(positionX), Grid.GridToCoord(positionY));
-        System.out.println("i got drawn at " + positionX + ", " + positionY);
+        //g2.setColor(Color.white);
+        //g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY));
+        System.out.println(buildingType + " got drawn at "+ positionX + ", " + positionY);
         getBuildingSprite();
-        g2.drawImage(testBuilding,Grid.GridToCoord(positionX), Grid.GridToCoord(positionY), cellSize, cellSize, null );
+        g2.drawImage(testBuilding,Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
     }
 }
