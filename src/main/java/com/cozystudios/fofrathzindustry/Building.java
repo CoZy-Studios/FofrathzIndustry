@@ -47,12 +47,7 @@ public class Building
         {
             try
             {
-                testBuilding = ImageIO.read(getClass().getResourceAsStream("/BuildingTest" + buildingType.toString() + ".png"));
-
-                testBuildingNorth = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestNorth.png")));
-                testBuildingEast = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestEast.png")));
-                testBuildingSouth = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestSouth.png")));
-                testBuildingWest = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestWest.png")));
+                testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
             }
             catch (IOException ignored)
             {
@@ -71,19 +66,5 @@ public class Building
 
         g2.drawImage(testBuilding, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
 
-        //switch (direction){
-        //    case north:
-        //        g2.drawImage(testBuildingNorth, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-        //        break;
-        //    case south:
-        //        g2.drawImage(testBuildingSouth, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-        //        break;
-        //    case east:
-        //        g2.drawImage(testBuildingEast, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-        //        break;
-        //    case west:
-        //        g2.drawImage(testBuildingWest, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-        //        break;
-        //}
     }
 }
