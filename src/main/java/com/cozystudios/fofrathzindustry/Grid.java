@@ -63,17 +63,15 @@ public class Grid
                     //For testing purposes
                     if(i == j)
                     {
-                        localBuildings[j][i].initialize(BuildingType.Belt, g2, j, i);
+                        localBuildings[j][i].initialize(BuildingType.Test, g2, j, i, Building.BuildingDirection.north);
                     }
                     else
                     {
-                        localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i);
+                        localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i, Building.BuildingDirection.north);
                     }
-
                 }
             }
         }
-
         //hasBeenGenerated = true;
     }
 }
