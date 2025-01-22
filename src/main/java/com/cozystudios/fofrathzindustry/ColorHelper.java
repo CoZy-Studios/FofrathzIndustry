@@ -37,14 +37,4 @@ public class ColorHelper {
 
         return new Color(red, green, blue);
     }
-
-    public static Color colorRandomizer()
-    {
-        Random randomize = new Random();
-        float red = randomize.nextFloat();
-        float green = randomize.nextFloat();
-        float blue = randomize.nextFloat();
-
-        return new Color(red, green, blue);
-    }
 }

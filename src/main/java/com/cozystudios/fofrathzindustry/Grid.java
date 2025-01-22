@@ -10,22 +10,24 @@ public class Grid
     int width = columns * cellSize;
     int height = rows * cellSize;
     public Tile[][] localGrid = new Tile[columns + 1][rows + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
+    public Building[][] localBuildings = new Building[columns + 1][rows + 1];
+    boolean hasBeenGenerated;
 
     FastNoiseLite mapNoise = new FastNoiseLite();
 
-    public static int GridToCoord(int tileInt)
+    public static int GridToCoordinate(int tileInt)
     {
         return (tileInt * cellSize) - cellSize;
     }
 
-    public static int CoordToGrid(int coordinate)
+    public static int CoordinateToGrid(int coordinate)
     {
-        return (int)Math.floor(coordinate / cellSize) + 1;
+        return (int)Math.floor((double) coordinate / cellSize) + 1;
     }
 
     public Grid() {
         Random randomize = new Random();
-
+        hasBeenGenerated = false;
         mapNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
         mapNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.CellValue);
         mapNoise.SetFrequency(0.005f);
@@ -36,20 +38,20 @@ public class Grid
             for (int j = 1; j <= columns; j++)
             {
                 localGrid[j][i] = new Tile();
+                localBuildings[j][i] = new Building();
             }
         }
     }
 
     public void drawGrid(Graphics2D g2)
     {
-        for(int i = 0; i <= rows; i++)
+        for(int i = 1; i <= rows; i++)
         {
-            for(int j = 0; j <= columns; j++)
+            for(int j = 1; j <= columns; j++)
             {
                 g2.setColor(Color.BLACK);
                 g2.drawRect((j - 1) * cellSize, (i - 1) * cellSize, cellSize, cellSize);
-
-                if(0 < i && i <= rows && 0 < j && j <= columns)
+                if(!hasBeenGenerated)
                 {
                     float noiseValue = mapNoise.GetNoise(j * 50, i * 50);
                     if(noiseValue > 0.95)
@@ -58,8 +60,20 @@ public class Grid
                         localGrid[j][i].initialize(TileType.Copper, g2, j, i);
                     else
                         localGrid[j][i].initialize(TileType.Grass, g2, j, i);
+                    //For testing purposes
+                    if(i == j)
+                    {
+                        localBuildings[j][i].initialize(BuildingType.Belt, g2, j, i);
+                    }
+                    else
+                    {
+                        localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i);
+                    }
+
                 }
             }
         }
+
+        //hasBeenGenerated = true;
     }
 }
