@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Grid
 {
-    int columns = 64;
-    int rows = 32;
+    int columns = 38;
+    int rows = 24;
     static int cellSize = 34;
     int width = columns * cellSize;
     int height = rows * cellSize;

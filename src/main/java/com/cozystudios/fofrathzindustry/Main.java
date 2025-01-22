@@ -7,10 +7,11 @@ public class Main
     public static void main(String[] args)
     {
         JFrame gameWindow = new JFrame();
+        JFrame UiWindow = new JFrame();
         Grid grid = new Grid();
         GamePanel gamePanel = new GamePanel(grid);
 
-        int width = grid.width + grid.columns + 1;
+        int width = grid.width + grid.columns + 1 + 100;
         int height = grid.height + Grid.cellSize + 6;
 
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,13 +19,17 @@ public class Main
         gameWindow.setTitle("FofrathzIndustry");
         gameWindow.setResizable(false); // Not resizeable for now, until we know how to stop it from stretching things
         gameWindow.setLocationRelativeTo(null);
-        gameWindow.setVisible(true);
 
-        gameWindow.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gameWindow.add(gamePanel, gbc);
+        UiWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        UiWindow.setSize(300, height);
+        UiWindow.setTitle("FofrathzIndustry Sidebar");
+        UiWindow.setResizable(false);
+
+        Point gameWindowPosition = gameWindow.getLocation();
+        UiWindow.setLocation(gameWindowPosition.x + gameWindow.getWidth(), gameWindowPosition.y);
+
+        gameWindow.add(gamePanel);
+        gameWindow.setVisible(true);
+        UiWindow.setVisible(true);
     }
 }
