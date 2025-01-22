@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Building
 {
     private final int cellSize = Grid.cellSize;
-    private BufferedImage testBuildingNorth, testBuildingSouth, testBuildingEast, testBuildingWest;
+    private BufferedImage testBuildingNorth, testBuildingSouth, testBuildingEast, testBuildingWest, testBuilding;
     private BuildingType buildingType;
     public BuildingDirection direction;
     public int positionX;
@@ -42,15 +42,22 @@ public class Building
 
     public void getBuildingSprite()
     {
-        try
+
+        if(buildingType == BuildingType.Test)
         {
-            testBuildingNorth = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestNorth.png")));
-            testBuildingEast = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestEast.png")));
-            testBuildingSouth = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestSouth.png")));
-            testBuildingWest = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestWest.png")));
-        }catch (IOException ignored)
-        {
-            System.out.println("could not get building sprite");
+            try
+            {
+                testBuilding = ImageIO.read(getClass().getResourceAsStream("/BuildingTest" + buildingType.toString() + ".png"));
+
+                testBuildingNorth = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestNorth.png")));
+                testBuildingEast = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestEast.png")));
+                testBuildingSouth = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestSouth.png")));
+                testBuildingWest = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/BuildingTestWest.png")));
+            }
+            catch (IOException ignored)
+            {
+                System.out.println("could not get building sprite");
+            }
         }
     }
 
@@ -62,19 +69,21 @@ public class Building
         System.out.println(buildingType + " got drawn at "+ positionX + ", " + positionY);
         getBuildingSprite();
 
-        switch (direction){
-            case north:
-                g2.drawImage(testBuildingNorth, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-                break;
-            case south:
-                g2.drawImage(testBuildingSouth, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-                break;
-            case east:
-                g2.drawImage(testBuildingEast, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-                break;
-            case west:
-                g2.drawImage(testBuildingWest, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
-                break;
-        }
+        g2.drawImage(testBuilding, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
+
+        //switch (direction){
+        //    case north:
+        //        g2.drawImage(testBuildingNorth, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
+        //        break;
+        //    case south:
+        //        g2.drawImage(testBuildingSouth, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
+        //        break;
+        //    case east:
+        //        g2.drawImage(testBuildingEast, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
+        //        break;
+        //    case west:
+        //        g2.drawImage(testBuildingWest, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null );
+        //        break;
+        //}
     }
 }
