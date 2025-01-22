@@ -35,3 +35,9 @@ Progress:
 - code clean up
 - no longer rendering empty buildings
 - properly display the building type in the bottom left corner of the tile, instead of the top of the tile
+
+22/1/25
+- R 15:00-16:10 , 16:40 -
+
+- Building Direction
+- Sprite Rotation

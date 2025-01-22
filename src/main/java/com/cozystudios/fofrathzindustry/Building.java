@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Building
 {
     private final int cellSize = Grid.cellSize;
-    private BufferedImage testBuildingNorth, testBuildingSouth, testBuildingEast, testBuildingWest, testBuilding;
+    private BufferedImage testBuilding;
     private BuildingType buildingType;
     public BuildingDirection direction;
     public int positionX;
@@ -66,5 +66,25 @@ public class Building
 
         g2.drawImage(testBuilding, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
 
+    }
+
+    public void rotateRight()
+    {
+        switch (direction)
+        {
+            case north -> direction = BuildingDirection.east;
+            case east -> direction = BuildingDirection.south;
+            case south -> direction = BuildingDirection.west;
+            case west -> direction = BuildingDirection.north;
+        }
+    }
+    public void rotateLeft()
+    {
+        switch (direction) {
+            case north -> direction = BuildingDirection.west;
+            case east -> direction = BuildingDirection.north;
+            case south -> direction = BuildingDirection.east;
+            case west -> direction = BuildingDirection.south;
+        }
     }
 }
