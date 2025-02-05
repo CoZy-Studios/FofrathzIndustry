@@ -15,6 +15,15 @@ public class Building
     public int positionX;
     public int positionY;
 
+    public Building inputSource;
+    public Building OutputTarget;
+
+    public Item input[];
+    public Item output[];
+
+    public float inputRate;
+    public float outputRate;
+
     public enum BuildingDirection
     {
         north,
