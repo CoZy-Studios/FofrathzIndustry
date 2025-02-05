@@ -10,6 +10,7 @@ public class Main
         JFrame UiWindow = new JFrame();
         Grid grid = new Grid();
         GamePanel gamePanel = new GamePanel(grid);
+        UiPanel uiPanel = new UiPanel();
 
         int width = grid.width + grid.columns + 1 + 100;
         int height = grid.height + Grid.cellSize + 6;
@@ -29,6 +30,7 @@ public class Main
         UiWindow.setLocation(gameWindowPosition.x + gameWindow.getWidth(), gameWindowPosition.y);
 
         gameWindow.add(gamePanel);
+        UiWindow.add(uiPanel);
         gameWindow.setVisible(true);
         UiWindow.setVisible(true);
     }

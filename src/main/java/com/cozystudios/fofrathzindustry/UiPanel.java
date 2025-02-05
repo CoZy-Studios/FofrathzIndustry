@@ -1,4 +1,4 @@
-﻿package com.cozystudios.fofrathzindustry;
+package com.cozystudios.fofrathzindustry;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,5 +14,7 @@ public class UiPanel extends JPanel {
                 testButton.setText("blegh");
             }
         });
+
+        this.add(testButton);
     }
 }
