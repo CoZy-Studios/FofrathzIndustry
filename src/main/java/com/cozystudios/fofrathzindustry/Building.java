@@ -1,6 +1,7 @@
 package com.cozystudios.fofrathzindustry;
 
 import javax.imageio.ImageIO;
+import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -94,6 +95,19 @@ public class Building
             case east -> direction = BuildingDirection.north;
             case south -> direction = BuildingDirection.east;
             case west -> direction = BuildingDirection.south;
+        }
+    }
+
+    public boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
+    {
+        switch (direction) {
+            case north -> {return !(0 >= PositionY - 1);}
+            case east -> {return !(columns <=);}
+            case south -> {
+            }
+            case west -> {
+            }
+            default -> false
         }
     }
 }
