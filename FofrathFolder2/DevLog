@@ -35,3 +35,12 @@ Progress:
 - code clean up
 - no longer rendering empty buildings
 - properly display the building type in the bottom left corner of the tile, instead of the top of the tile
+
+22/1/25
+- R 15:00-16:10 , 16:40 - 17:10
+
+- Building Direction
+- Sprite Rotation
+- optimized the image loader to prevent ugly code
+- beginning of a uniform naming system for Sprites
+- experimented with adding a sidebar (/new window)
