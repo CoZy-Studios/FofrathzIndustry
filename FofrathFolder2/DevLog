@@ -11,7 +11,7 @@ Progress:
 - tile types exist now
 - color (randomized to be less monotonous) for the tiles
 
-19/91/25
+19/1/25
 - R began at 13:00, took a break 14:30
 
 - cleaned up some code
@@ -44,3 +44,11 @@ Progress:
 - optimized the image loader to prevent ugly code
 - beginning of a uniform naming system for Sprites
 - experimented with adding a sidebar (/new window)
+
+?/?/25
+
+12/2/25
+
+
+- direction to cord
+- in bound checker

@@ -26,13 +26,17 @@ public class Grid
         return (int)Math.floor((double) coordinate / cellSize) + 1;
     }
 
-    public static int DirectionToNewCord(Building.BuildingDirection direction, int cordOnChangingAxis)
-    {
+    public static int DirectionToNewCord(Building.BuildingDirection direction, int cordOnChangingAxis) {
         switch (direction) {
             case north, west -> {return cordOnChangingAxis - 1;}
             case east, south -> {return cordOnChangingAxis + 1;}
             default -> {throw new RuntimeException("Invalid direction to cord");}
         }
+    }
+
+    public  Building GetBuildingFromCords(int positionX, int positionY)
+    {
+        return localBuildings[positionX][positionY];
     }
 
     public Grid() {
@@ -73,11 +77,11 @@ public class Grid
                     //For testing purposes
                     if(i == j)
                     {
-                        localBuildings[j][i].initialize(BuildingType.Test, g2, j, i, Building.BuildingDirection.north);
+                        localBuildings[j][i].initialize(BuildingType.Test, g2, j, i, Building.BuildingDirection.north, this);
                     }
                     else
                     {
-                        localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i, Building.BuildingDirection.north);
+                        localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i, Building.BuildingDirection.north, this);
                     }
                 }
             }

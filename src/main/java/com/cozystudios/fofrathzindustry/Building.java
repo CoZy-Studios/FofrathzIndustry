@@ -12,12 +12,13 @@ public class Building
     private final int cellSize = Grid.cellSize;
     private BufferedImage testBuilding;
     private BuildingType buildingType;
+    private Grid grid;
     public BuildingDirection direction;
     public int positionX;
     public int positionY;
 
     public Building inputSource;
-    public Building OutputTarget;
+    public Building outputTarget;
 
     public Item input[];
     public Item output[];
@@ -33,12 +34,14 @@ public class Building
         west
     }
 
-    public void initialize(BuildingType type, Graphics2D g2, int posX, int posY, BuildingDirection buildingDirection)
+    public void initialize(BuildingType type, Graphics2D g2, int posX, int posY, BuildingDirection buildingDirection, Grid parentGrid)
     {
         buildingType = type;
         positionX = posX;
         positionY = posY;
         direction = buildingDirection;
+        grid = parentGrid;
+
         if(buildingType == BuildingType.Empty)
         {
             System.out.println("I am " + buildingType + " inside");
@@ -95,6 +98,21 @@ public class Building
             case east -> direction = BuildingDirection.north;
             case south -> direction = BuildingDirection.east;
             case west -> direction = BuildingDirection.south;
+        }
+    }
+    //TODO: implement a OnChange
+    public void UpdateNextBuildingInput()
+    {
+        if(isTargetInBounds(direction, positionX, positionY))
+        {
+            switch (direction) {
+                case north, south -> {outputTarget = grid.GetBuildingFromCords(positionX, Grid.DirectionToNewCord(direction, positionY));}
+                case east, west -> {outputTarget = grid.GetBuildingFromCords(Grid.DirectionToNewCord(direction, positionX), positionY);}
+            }
+            if(outputTarget.buildingType != BuildingType.Empty)
+            {
+
+            }
         }
     }
 
