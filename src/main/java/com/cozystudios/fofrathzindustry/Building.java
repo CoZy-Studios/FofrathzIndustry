@@ -102,12 +102,10 @@ public class Building
     {
         switch (direction) {
             case north -> {return !(0 >= PositionY - 1);}
-            case east -> {return !(columns <=);}
-            case south -> {
-            }
-            case west -> {
-            }
-            default -> false
+            case east -> {return !(Grid.columns >= PositionX+1);}
+            case south -> {return !(Grid.rows >= PositionY+1);}
+            case west -> {return !(0 >= PositionX-1);}
+            default -> {throw new RuntimeException("Invalid direction for In Bounds Check");}
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.cozystudios.fofrathzindustry;
 import java.awt.*;
 import java.util.Random;
+import java.util.Vector;
 
 public class Grid
 {
@@ -23,6 +24,15 @@ public class Grid
     public static int CoordinateToGrid(int coordinate)
     {
         return (int)Math.floor((double) coordinate / cellSize) + 1;
+    }
+
+    public static int DirectionToNewCord(Building.BuildingDirection direction, int cordOnChangingAxis)
+    {
+        switch (direction) {
+            case north, west -> {return cordOnChangingAxis - 1;}
+            case east, south -> {return cordOnChangingAxis + 1;}
+            default -> {throw new RuntimeException("Invalid direction to cord");}
+        }
     }
 
     public Grid() {
