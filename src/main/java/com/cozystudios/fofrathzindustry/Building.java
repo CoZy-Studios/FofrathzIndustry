@@ -111,7 +111,7 @@ public class Building
             }
             if(outputTarget.buildingType != BuildingType.Empty)
             {
-
+                outputTarget.input = output;
             }
         }
     }
