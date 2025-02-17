@@ -13,7 +13,6 @@ public class UiPanel extends JPanel {
 
         JLabel buildingMenuLabel = new JLabel("Building Menu");
         JLabel buildLabel = new JLabel("Build");
-        JPanel emptyPanel = new JPanel();
 
         JButton testButton = new JButton("Press");
         JButton buildButton = new JButton("Build");
@@ -25,10 +24,11 @@ public class UiPanel extends JPanel {
         });
 
         this.add(buildingMenuLabel);
-        this.add(emptyPanel);
+        this.add(new JPanel());
         this.add(buildLabel);
         this.add(buildButton);
-        this.add(emptyPanel);
-        this.add(testButton);
+
+        this.add(new JPanel());
+        this.add(new JPanel());
     }
 }
