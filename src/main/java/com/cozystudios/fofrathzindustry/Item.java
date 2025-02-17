@@ -10,4 +10,11 @@ public class Item
         //Iron,
         Coal
     }
+
+    int rate;
+
+    public void Initialize(ItemType type, int rate)
+    {
+
+    }
 }

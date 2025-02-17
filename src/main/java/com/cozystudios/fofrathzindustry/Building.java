@@ -5,7 +5,8 @@ import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Objects;
+import java.util.*;
+import java.util.List;
 
 public class Building
 {
@@ -20,8 +21,8 @@ public class Building
     public Building inputSource;
     public Building outputTarget;
 
-    public Item input[];
-    public Item output[];
+    public List<Item> input = new ArrayList<Item>();
+    public List<Item> output = new ArrayList<Item>();
 
     public float inputRate;
     public float outputRate;
@@ -106,8 +107,8 @@ public class Building
         if(isTargetInBounds(direction, positionX, positionY))
         {
             switch (direction) {
-                case north, south -> {outputTarget = grid.GetBuildingFromCords(positionX, Grid.DirectionToNewCord(direction, positionY));}
-                case east, west -> {outputTarget = grid.GetBuildingFromCords(Grid.DirectionToNewCord(direction, positionX), positionY);}
+                case north, south -> outputTarget = grid.GetBuildingFromCords(positionX, Grid.DirectionToNewCord(direction, positionY));
+                case east, west -> outputTarget = grid.GetBuildingFromCords(Grid.DirectionToNewCord(direction, positionX), positionY);
             }
             if(outputTarget.buildingType != BuildingType.Empty)
             {
@@ -126,4 +127,32 @@ public class Building
             default -> {throw new RuntimeException("Invalid direction for In Bounds Check");}
         }
     }
+    //TODO: Finish the other building Types
+    private void SetOutput(BuildingType buildingType, Grid grid)
+    {
+        switch (buildingType) {
+            case Test -> {}
+            case Extractor ->
+            {
+                Item item = new Item();
+                output.add(item);
+                for(Item outputItem : output)
+                {
+                    TileType tileType = getTileType(positionX, positionY, grid);
+                    switch (tileType) {
+                        case Grass -> {item.Initialize(Item.ItemType.None, 0);}
+                        case Copper -> {item.Initialize(Item.ItemType.Copper, 15);}
+                        case Coal -> {item.Initialize(Item.ItemType.Coal, 15);}
+                    }
+                }
+            }
+            case Belt ->
+            {output = input;}
+            case Manufacturer -> {}
+            case Empty -> {output.clear();}
+            default -> throw new IllegalStateException("Unexpected value: " + buildingType);
+        }
+    }
+
+    private TileType getTileType(int PosX, int PosY, Grid grid) {return grid.localGrid[PosX][PosY].getTileType();}
 }
