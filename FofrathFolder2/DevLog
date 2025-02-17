@@ -12,10 +12,35 @@ Progress:
 - color (randomized to be less monotonous) for the tiles
 
 19/91/25
-- R began at 13:00
+- R began at 13:00, took a break 14:30
 
 - cleaned up some code
 - added procedural map generation
 - fixed some minor (skill) issues
-- prevented colors from getting rerandomized when the window leaves the screen
+- prevented colors from getting re-randomized when the window leaves the screen
 - added copper color
+- tried rendering building Sprites
+
+20/1/25
+- R 10:30 - 11:40
+
+- fixed redundancies
+- implemented sprite loading
+- created Building grid (filled with empty buildings)
+
+21/1/25
+- R 10:00 - 11:00
+
+- fixed Grid rendering, the "hasBeenGenerated" randomly breaks
+- code clean up
+- no longer rendering empty buildings
+- properly display the building type in the bottom left corner of the tile, instead of the top of the tile
+
+22/1/25
+- R 15:00-16:10 , 16:40 - 17:10
+
+- Building Direction
+- Sprite Rotation
+- optimized the image loader to prevent ugly code
+- beginning of a uniform naming system for Sprites
+- experimented with adding a sidebar (/new window)

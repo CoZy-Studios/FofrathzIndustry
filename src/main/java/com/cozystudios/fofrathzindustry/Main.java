@@ -1,5 +1,4 @@
 package com.cozystudios.fofrathzindustry;
-import java.awt.*;
 import javax.swing.*;
 
 public class Main
