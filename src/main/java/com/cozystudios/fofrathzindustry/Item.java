@@ -11,9 +11,9 @@ public class Item
         Coal
     }
 
-    int rate;
+    float rate;
 
-    public void Initialize(ItemType type, int rate)
+    public void Initialize(ItemType type, float rate)
     {
 
     }

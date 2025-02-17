@@ -1,7 +1,6 @@
 package com.cozystudios.fofrathzindustry;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -21,8 +20,8 @@ public class Building
     public Building inputSource;
     public Building outputTarget;
 
-    public List<Item> input = new ArrayList<Item>();
-    public List<Item> output = new ArrayList<Item>();
+    public List<Item> input;
+    public List<Item> output;
 
     public float inputRate;
     public float outputRate;
@@ -42,7 +41,8 @@ public class Building
         positionY = posY;
         direction = buildingDirection;
         grid = parentGrid;
-
+        output = new ArrayList<Item>();
+        input = new ArrayList<Item>();
         if(buildingType == BuildingType.Empty)
         {
             System.out.println("I am " + buildingType + " inside");
@@ -52,6 +52,7 @@ public class Building
             System.out.println("I am " + buildingType);
             drawBuilding(g2);
         }
+        SetOutput(buildingType, grid);
     }
 
     public void getBuildingSprite()
@@ -141,8 +142,8 @@ public class Building
                     TileType tileType = getTileType(positionX, positionY, grid);
                     switch (tileType) {
                         case Grass -> {item.Initialize(Item.ItemType.None, 0);}
-                        case Copper -> {item.Initialize(Item.ItemType.Copper, 15);}
-                        case Coal -> {item.Initialize(Item.ItemType.Coal, 15);}
+                        case Copper -> {item.Initialize(Item.ItemType.Copper, outputRate);}
+                        case Coal -> {item.Initialize(Item.ItemType.Coal, outputRate);}
                     }
                 }
             }
@@ -153,6 +154,5 @@ public class Building
             default -> throw new IllegalStateException("Unexpected value: " + buildingType);
         }
     }
-
     private TileType getTileType(int PosX, int PosY, Grid grid) {return grid.localGrid[PosX][PosY].getTileType();}
 }
