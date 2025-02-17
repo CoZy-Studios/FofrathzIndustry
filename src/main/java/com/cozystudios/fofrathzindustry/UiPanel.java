@@ -7,28 +7,25 @@ import java.awt.event.ActionListener;
 
 public class UiPanel extends JPanel {
 
-    public UiPanel(){
-        GridLayout layout = new GridLayout(3, 2, 0, 0);
+    public UiPanel(GamePanel gamePanel){
+        GridLayout layout = new GridLayout(0, 2, 30, 50);
         this.setLayout(layout);
 
         JLabel buildingMenuLabel = new JLabel("Building Menu");
         JLabel buildLabel = new JLabel("Build");
 
-        JButton testButton = new JButton("Press");
         JButton buildButton = new JButton("Build");
-        testButton.addActionListener(new ActionListener() {
+        buildButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                testButton.setText("blegh");
+                buildButton.setText("haha rip L F lol");
+                gamePanel.PlacingBuilding();
             }
         });
 
         this.add(buildingMenuLabel);
-        this.add(new JPanel());
+        this.add(new JPanel());     // White space
         this.add(buildLabel);
         this.add(buildButton);
-
-        this.add(new JPanel());
-        this.add(new JPanel());
     }
 }

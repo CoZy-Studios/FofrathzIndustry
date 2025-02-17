@@ -12,6 +12,10 @@ public class GamePanel extends JPanel
         grid = pGrid;
     }
 
+    public void PlacingBuilding(){
+
+    }
+
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
