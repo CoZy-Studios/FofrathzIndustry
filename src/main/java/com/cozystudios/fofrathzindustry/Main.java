@@ -38,5 +38,7 @@ public class Main
         UiWindow.add(uiPanel);
         gameWindow.setVisible(true);
         UiWindow.setVisible(true);
+
+        gamePanel.startGameThread();
     }
 }

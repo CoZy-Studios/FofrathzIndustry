@@ -1,4 +1,4 @@
-﻿package com.cozystudios.fofrathzindustry;
+package com.cozystudios.fofrathzindustry;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        System.out.println("mouse pressed");
     }
 
     @Override
