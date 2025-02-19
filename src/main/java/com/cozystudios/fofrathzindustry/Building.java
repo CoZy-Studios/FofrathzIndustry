@@ -154,5 +154,11 @@ public class Building
             default -> throw new IllegalStateException("Unexpected value: " + buildingType);
         }
     }
+
+    public void OnChange()
+    {
+
+    }
+
     private TileType getTileType(int PosX, int PosY, Grid grid) {return grid.localGrid[PosX][PosY].getTileType();}
 }
