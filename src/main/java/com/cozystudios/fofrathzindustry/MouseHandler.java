@@ -8,6 +8,12 @@ import java.awt.event.MouseListener;
 public class MouseHandler implements MouseListener {
 
     public boolean mousePressed = false;
+    private GamePanel _gamepanel;
+
+    public MouseHandler(GamePanel gamePanel){
+        _gamepanel = gamePanel;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         mousePressed = true;
@@ -33,7 +39,9 @@ public class MouseHandler implements MouseListener {
 
     }
 
-    public static Point getMousePos(){
-        return MouseInfo.getPointerInfo().getLocation();
+    public Point getMousePos(){
+        Point mousePos = MouseInfo.getPointerInfo().getLocation();
+        SwingUtilities.convertPointFromScreen(mousePos, _gamepanel);
+        return mousePos;
     }
 }

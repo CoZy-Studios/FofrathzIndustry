@@ -19,7 +19,7 @@ public class UiPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 buildButton.setText("haha rip L F lol");
-                gamePanel.PlacingBuilding();
+                gamePanel.placingBuilding = true;
             }
         });
 

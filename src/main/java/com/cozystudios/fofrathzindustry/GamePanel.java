@@ -6,11 +6,13 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable
 {
     Grid grid;
-    MouseHandler mouseHandler = new MouseHandler();
+    MouseHandler mouseHandler = new MouseHandler(this);
 
     Thread gameThread;
 
     int fps = 60;
+
+    boolean placingBuilding = false;
 
     public GamePanel(Grid pGrid)
     {
@@ -24,10 +26,13 @@ public class GamePanel extends JPanel implements Runnable
     }
 
     public void PlacingBuilding(){
-
+        Point mousePos = mouseHandler.getMousePos();
+        Building buildingToPlace = new Building();
     }
 
     public void Update(){
+        if(placingBuilding)
+            PlacingBuilding();
     }
 
     public void paintComponent(Graphics g)
