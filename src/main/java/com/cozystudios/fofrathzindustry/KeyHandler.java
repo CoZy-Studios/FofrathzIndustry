@@ -9,33 +9,30 @@ public class KeyHandler implements KeyListener {
     public KeyHandler()
     {
         //this.gp = gp;
+        System.out.println("KeyHandler created");
     }
 
     @Override
     public void keyTyped(KeyEvent e)
     {
-        int key = e.getKeyCode();
-
-        if(key == KeyEvent.VK_ENTER){
-            System.out.println("testingt");
-        }
-        if(key == KeyEvent.VK_ESCAPE)
-        {
-
-        }
+        System.out.println("KeyTyped");
+        int key = e.getKeyChar();
+        System.out.println(key);
     }
 
     @Override
     public void keyPressed(KeyEvent e)
     {
-
+        System.out.println("KeyPressed");
+        int key = e.getKeyChar();
+        System.out.println(key);
     }
 
     @Override
     public void keyReleased(KeyEvent e)
     {
-
+        System.out.println("KeyReleased");
+        int key = e.getKeyChar();
+        System.out.println(key);
     }
-
-
 }
