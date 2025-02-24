@@ -12,6 +12,7 @@ public class Grid
     int height = rows * cellSize;
     public Tile[][] localGrid = new Tile[columns + 1][rows + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
     public Building[][] localBuildings = new Building[columns + 1][rows + 1];
+    public Tile[][] currentlyVisibleLocalGrid = new Tile[16 + 1][16 + 1];
     boolean hasBeenGenerated;
 
     FastNoiseLite mapNoise = new FastNoiseLite();
@@ -49,6 +50,10 @@ public class Grid
             {
                 localGrid[j][i] = new Tile();
                 localBuildings[j][i] = new Building();
+                if(j < 17 && i < 17)
+                {
+                    currentlyVisibleLocalGrid[j][i] = localGrid[j][i];
+                }
             }
         }
     }
@@ -82,6 +87,10 @@ public class Grid
                 }
             }
         }
-        //hasBeenGenerated = true;
+    }
+
+    public void MoveCurrentLocalGrid()
+    {
+
     }
 }

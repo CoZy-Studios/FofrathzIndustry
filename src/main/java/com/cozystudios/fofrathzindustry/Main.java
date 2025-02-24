@@ -9,8 +9,10 @@ public class Main
         Grid grid = new Grid();
         GamePanel gamePanel = new GamePanel(grid);
 
-        int width = grid.width + grid.columns + 1;
-        int height = grid.height + Grid.cellSize + 6;
+        //int width = grid.width + grid.columns + 1;
+        int width = 16 * Grid.cellSize + 15;
+        //int height = grid.height + Grid.cellSize + 6;
+        int height = 16 * Grid.cellSize + 6 + Grid.cellSize;
 
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setSize(width, height);  //final size / resize-ability is up to debate
