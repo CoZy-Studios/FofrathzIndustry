@@ -33,7 +33,7 @@ public class Building
         west
     }
 
-    public void initialize(BuildingType type, Graphics2D g2, int posX, int posY, BuildingDirection buildingDirection)
+    public Building(BuildingType type, Graphics2D g2, int posX, int posY, BuildingDirection buildingDirection)
     {
         buildingType = type;
         positionX = posX;
