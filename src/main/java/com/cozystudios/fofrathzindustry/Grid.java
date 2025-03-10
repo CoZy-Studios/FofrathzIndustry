@@ -1,18 +1,15 @@
 package com.cozystudios.fofrathzindustry;
 import java.awt.*;
 import java.util.Random;
-import java.util.Vector;
 
 public class Grid
 {
-    static int columns = 64;
-    static int rows = 32;
+    static int columns = 38;
+    static int rows = 24;
     static int cellSize = 34;
     int width = columns * cellSize;
     int height = rows * cellSize;
     public Tile[][] localGrid = new Tile[columns + 1][rows + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
-    public Building[][] localBuildings = new Building[columns + 1][rows + 1];
-    boolean hasBeenGenerated;
 
     FastNoiseLite mapNoise = new FastNoiseLite();
 
@@ -23,21 +20,12 @@ public class Grid
 
     public static int CoordinateToGrid(int coordinate)
     {
-        return (int)Math.floor((double) coordinate / cellSize) + 1;
-    }
-
-    public static int DirectionToNewCord(Building.BuildingDirection direction, int cordOnChangingAxis)
-    {
-        switch (direction) {
-            case north, west -> {return cordOnChangingAxis - 1;}
-            case east, south -> {return cordOnChangingAxis + 1;}
-            default -> {throw new RuntimeException("Invalid direction to cord");}
-        }
+        return (int)Math.floor(coordinate / cellSize) + 1;
     }
 
     public Grid() {
         Random randomize = new Random();
-        hasBeenGenerated = false;
+
         mapNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
         mapNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.CellValue);
         mapNoise.SetFrequency(0.005f);
@@ -48,20 +36,20 @@ public class Grid
             for (int j = 1; j <= columns; j++)
             {
                 localGrid[j][i] = new Tile();
-                localBuildings[j][i] = new Building();
             }
         }
     }
 
     public void drawGrid(Graphics2D g2)
     {
-        for(int i = 1; i <= rows; i++)
+        for(int i = 0; i <= rows; i++)
         {
-            for(int j = 1; j <= columns; j++)
+            for(int j = 0; j <= columns; j++)
             {
                 g2.setColor(Color.BLACK);
                 g2.drawRect((j - 1) * cellSize, (i - 1) * cellSize, cellSize, cellSize);
-                if(!hasBeenGenerated)
+
+                if(0 < i && i <= rows && 0 < j && j <= columns)
                 {
                     float noiseValue = mapNoise.GetNoise(j * 50, i * 50);
                     if(noiseValue > 0.95)
@@ -70,18 +58,8 @@ public class Grid
                         localGrid[j][i].initialize(TileType.Copper, g2, j, i);
                     else
                         localGrid[j][i].initialize(TileType.Grass, g2, j, i);
-                    //For testing purposes
-                    if(i == j)
-                    {
-                        localBuildings[j][i].initialize(BuildingType.Test, g2, j, i, Building.BuildingDirection.north);
-                    }
-                    else
-                    {
-                        localBuildings[j][i].initialize(BuildingType.Empty, g2, j, i, Building.BuildingDirection.north);
-                    }
                 }
             }
         }
-        //hasBeenGenerated = true;
     }
 }
