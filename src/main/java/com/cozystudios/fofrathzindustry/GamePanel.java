@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable
 
     public void PlacingBuilding(){
         Point mousePos = mouseHandler.getMousePos();
-        Building buildingToPlace = new Building();
+        //Building buildingToPlace = new Building();
     }
 
     public void Update(){

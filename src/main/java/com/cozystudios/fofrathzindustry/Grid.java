@@ -1,5 +1,7 @@
 package com.cozystudios.fofrathzindustry;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Grid
@@ -10,6 +12,7 @@ public class Grid
     int width = columns * cellSize;
     int height = rows * cellSize;
     public Tile[][] localGrid = new Tile[columns + 1][rows + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
+    private List<Building> _buildings;
 
     FastNoiseLite mapNoise = new FastNoiseLite();
 
@@ -24,6 +27,7 @@ public class Grid
     }
 
     public Grid() {
+        _buildings = new ArrayList<>();
         Random randomize = new Random();
 
         mapNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
