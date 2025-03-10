@@ -33,9 +33,19 @@ public class GamePanel extends JPanel
         {
             case KeyEvent.VK_A:
                 System.out.println("Key A Pressed");
+                grid.MoveCurrentLocalGrid(Building.BuildingDirection.west);
                 break;
             case KeyEvent.VK_D:
                 System.out.println("Key D Pressed");
+                grid.MoveCurrentLocalGrid(Building.BuildingDirection.east);
+                break;
+            case KeyEvent.VK_W:
+                System.out.println("Key W Pressed");
+                grid.MoveCurrentLocalGrid(Building.BuildingDirection.north);
+                break;
+            case KeyEvent.VK_S:
+                System.out.println("Key S Pressed");
+                grid.MoveCurrentLocalGrid(Building.BuildingDirection.south);
                 break;
         }
     }

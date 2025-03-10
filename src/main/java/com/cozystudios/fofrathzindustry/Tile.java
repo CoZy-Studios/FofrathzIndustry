@@ -8,8 +8,9 @@ public class Tile
 {
     private TileType tileType;
     private Color tileColor = Color.white;
+    boolean hasBeenGenerated = false;
 
-    public void initialize(TileType type, Graphics2D g2, int gridPositionX, int gridPositionY)
+    public void initialize(TileType type, int gridPositionX, int gridPositionY)
     {
         tileType = type;
         if(tileColor == Color.white)
@@ -23,7 +24,8 @@ public class Tile
             }
         }
         System.out.println("tile initialized, I am " + tileType);
-        drawTile(g2 ,gridPositionX ,gridPositionY);
+        //drawTile(g2 ,gridPositionX ,gridPositionY);
+        hasBeenGenerated = true;
     }
 
     protected void drawTile(Graphics2D g2, int positionX, int positionY)
