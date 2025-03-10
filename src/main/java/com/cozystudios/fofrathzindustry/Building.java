@@ -33,7 +33,7 @@ public class Building
         west
     }
 
-    public Building(BuildingType type, Graphics2D g2, int posX, int posY, BuildingDirection buildingDirection)
+    public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection)
     {
         buildingType = type;
         positionX = posX;
@@ -46,7 +46,6 @@ public class Building
         else
         {
             System.out.println("I am " + buildingType);
-            drawBuilding(g2);
         }
     }
 

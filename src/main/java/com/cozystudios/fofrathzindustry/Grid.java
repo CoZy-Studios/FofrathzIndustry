@@ -66,4 +66,8 @@ public class Grid
             }
         }
     }
+
+    public List<Building> GetBuildings(){
+        return _buildings;
+    }
 }

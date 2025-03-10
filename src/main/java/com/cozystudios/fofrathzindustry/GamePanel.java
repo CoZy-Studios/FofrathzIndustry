@@ -2,6 +2,7 @@ package com.cozystudios.fofrathzindustry;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -12,7 +13,7 @@ public class GamePanel extends JPanel implements Runnable
 
     int fps = 60;
 
-    boolean placingBuilding = false;
+    private final AtomicBoolean placingBuilding = new AtomicBoolean(false);
 
     public GamePanel(Grid pGrid)
     {
@@ -27,12 +28,17 @@ public class GamePanel extends JPanel implements Runnable
 
     public void PlacingBuilding(){
         Point mousePos = mouseHandler.getMousePos();
-        //Building buildingToPlace = new Building();
+        Building buildingToPlace = new Building(BuildingType.Test, mousePos.x, mousePos.y, Building.BuildingDirection.north);
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
     }
 
     public void Update(){
-        if(placingBuilding)
-            PlacingBuilding();
+
     }
 
     public void paintComponent(Graphics g)
@@ -41,6 +47,9 @@ public class GamePanel extends JPanel implements Runnable
         Graphics2D g2 = (Graphics2D) g;
 
         grid.drawGrid(g2);
+        for(Building building : grid.GetBuildings()){
+            building.drawBuilding(g2);
+        }
     }
 
     @Override
