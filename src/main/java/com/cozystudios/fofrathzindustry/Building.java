@@ -11,7 +11,7 @@ public class Building
 {
     private final int cellSize = Grid.cellSize;
     private BufferedImage testBuilding;
-    private BuildingType buildingType;
+    public BuildingType buildingType;
     public BuildingDirection direction;
     public int positionX;
     public int positionY;
@@ -63,6 +63,11 @@ public class Building
                 System.out.println("could not get building sprite");
             }
         }
+    }
+
+    public void setPosition(Point newPosition){
+        positionX = newPosition.x;
+        positionY = newPosition.y;
     }
 
     public void drawBuilding(Graphics2D g2)

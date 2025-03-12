@@ -26,6 +26,10 @@ public class Grid
         return (int)Math.floor(coordinate / cellSize) + 1;
     }
 
+    public static Point PointToGrid(Point point){
+        return new Point(CoordinateToGrid(point.x), CoordinateToGrid(point.y));
+    }
+
     public Grid() {
         _buildings = new ArrayList<>();
         Random randomize = new Random();
@@ -69,5 +73,10 @@ public class Grid
 
     public List<Building> GetBuildings(){
         return _buildings;
+    }
+
+    public void AddBuilding(Building building){
+        _buildings.add(building);
+        System.out.println("Added building to building List: " + building.buildingType);
     }
 }

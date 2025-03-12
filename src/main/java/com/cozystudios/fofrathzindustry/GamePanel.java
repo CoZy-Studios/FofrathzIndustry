@@ -27,14 +27,26 @@ public class GamePanel extends JPanel implements Runnable
     }
 
     public void PlacingBuilding(){
-        Point mousePos = mouseHandler.getMousePos();
-        Building buildingToPlace = new Building(BuildingType.Test, mousePos.x, mousePos.y, Building.BuildingDirection.north);
+        placingBuilding.set(true);
+
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+                Point initialMousePos = Grid.PointToGrid(mouseHandler.getMousePos());
+                System.out.println("Initial position relative to Grid: X: " + initialMousePos.x + " Y: " + initialMousePos.y + "\n placingBuilding bool: " + placingBuilding.get());
+                Building buildingToPlace = new Building(BuildingType.Test, initialMousePos.x, initialMousePos.y, Building.BuildingDirection.north);
 
+                grid.AddBuilding(buildingToPlace);
+
+                while(placingBuilding.get()){
+                    Point mousePos = Grid.PointToGrid(mouseHandler.getMousePos());
+                    buildingToPlace.setPosition(mousePos);
+                    repaint();
+                }
             }
         });
+
+        t.start();
     }
 
     public void Update(){

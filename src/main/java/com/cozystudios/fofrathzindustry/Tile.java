@@ -22,7 +22,7 @@ public class Tile
                 default -> g2.setColor(Color.WHITE);
             }
         }
-        System.out.println("tile initialized, I am " + tileType);
+        //System.out.println("tile initialized, I am " + tileType);
         drawTile(g2 ,gridPositionX ,gridPositionY);
     }
 
