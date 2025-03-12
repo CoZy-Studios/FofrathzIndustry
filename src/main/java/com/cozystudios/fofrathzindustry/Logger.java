@@ -6,10 +6,14 @@ import java.util.List;
 
 public class Logger {
 
-    public static List<Class> loggedClasses;
+    public static List<Class> loggedClasses = new ArrayList<>();
 
-    public Logger() {
-        loggedClasses = new ArrayList<Class>();
+    public static void activateLogger()
+    {
+        //Just add the classes here you want to have checked
+        // addClassToLogger(Classname.class)
+        addClassToLogger(Logger.class);
+        addClassToLogger(MouseHandler.class);
     }
 
     public static void addClassToLogger(Class loggedClass)
@@ -17,25 +21,14 @@ public class Logger {
         loggedClasses.add(loggedClass);
     }
 
-    public static void log(Class loggedClass,String message, Boolean HasIssues)
-    {
-        if(loggedClasses.contains(loggedClass))
-        {
-            String className = loggedClass.getClass().getSimpleName();
-            if(HasIssues){
-                System.out.println("!Error! " +className + " : " + message);
-            }
-            System.out.println(className + " : " + message);
-
-        }
-    }
     public static void log(Class loggedClass,String message)
     {
-        if(loggedClasses.contains(loggedClass))
-        {
-            String className = loggedClass.getClass().getSimpleName();
+        if(!loggedClasses.isEmpty() || loggedClass == Logger.class) {
+            if (loggedClasses.contains(loggedClass)) {
+                String className = loggedClass.getSimpleName();
 
-            System.out.println(className + " : " + message);
-        }
+                System.out.println(className + " : " + message);
+            }
+        }else log(Logger.class, "logger is empty");
     }
 }
