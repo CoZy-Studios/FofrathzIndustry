@@ -79,4 +79,35 @@ public class Grid
         _buildings.add(building);
         System.out.println("Added building to building List: " + building.buildingType);
     }
+
+    public void SurroundingBuilding(int PosX, int PosY)
+    {
+        for(Building building : GetBuildings())
+        {
+            //   0
+            // 0 x 0
+            //   0
+            if(building.positionX == PosX && building.positionY == PosY){building.AffectedByChange();}
+
+            //   0
+            // x 0 0
+            //   0
+            else if(building.positionX -1 == PosX && building.positionY == PosY){building.AffectedByChange();}
+
+            //   0
+            // 0 0 x
+            //   0
+            else if(building.positionX +1 == PosX && building.positionY == PosY){building.AffectedByChange();}
+
+            //   x
+            // 0 0 0
+            //   0
+            else if(building.positionX == PosX && building.positionY -1 == PosY){building.AffectedByChange();}
+
+            //   0
+            // 0 0 0
+            //   x
+            else if(building.positionX == PosX && building.positionY +1 == PosY){ building.AffectedByChange(); }
+        }
+    }
 }

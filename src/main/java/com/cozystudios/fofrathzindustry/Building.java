@@ -1,7 +1,6 @@
 package com.cozystudios.fofrathzindustry;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.Position;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -112,4 +111,12 @@ public class Building
             default -> {throw new RuntimeException("Invalid direction for In Bounds Check");}
         }
     }
+
+    public void AffectedByChange()
+    {
+        Logger.log(this.getClass(), "AffectedByChange");
+    }
+
+
+
 }

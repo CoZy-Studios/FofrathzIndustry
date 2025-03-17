@@ -14,6 +14,7 @@ public class Logger {
         // addClassToLogger(Classname.class)
         addClassToLogger(Logger.class);
         addClassToLogger(MouseHandler.class);
+        addClassToLogger(Building.class);
     }
 
     public static void addClassToLogger(Class loggedClass)
