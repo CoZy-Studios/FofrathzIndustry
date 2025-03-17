@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable
                     if(clicked > 0)
                     {
                         placingBuilding.set(false);
+                        OnChange(mousePos.x, mousePos.y);
                         break;
                     }
                 }
@@ -95,4 +96,10 @@ public class GamePanel extends JPanel implements Runnable
             }
         }
     }
+
+    public void OnChange(int PosX, int PosY)
+    {
+        grid.SurroundingBuilding(PosX, PosY);
+    }
+
 }
