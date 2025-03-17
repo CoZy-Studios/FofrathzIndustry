@@ -17,6 +17,7 @@ public class MouseHandler implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         mousePressed = true;
+        _gamepanel.clicked++;
     }
 
     @Override

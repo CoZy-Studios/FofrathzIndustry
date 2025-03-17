@@ -12,6 +12,7 @@ public class GamePanel extends JPanel implements Runnable
     Thread gameThread;
 
     int fps = 60;
+    public int clicked = 0;
 
     private final AtomicBoolean placingBuilding = new AtomicBoolean(false);
 
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable
 
     public void PlacingBuilding(){
         placingBuilding.set(true);
+        clicked = 0;
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -42,6 +44,12 @@ public class GamePanel extends JPanel implements Runnable
                     Point mousePos = Grid.PointToGrid(mouseHandler.getMousePos());
                     buildingToPlace.setPosition(mousePos);
                     repaint();
+
+                    if(clicked > 0)
+                    {
+                        placingBuilding.set(false);
+                        break;
+                    }
                 }
             }
         });
