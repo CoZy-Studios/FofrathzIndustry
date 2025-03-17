@@ -41,11 +41,11 @@ public class Building
         direction = buildingDirection;
         if(buildingType == BuildingType.Empty)
         {
-            System.out.println("I am " + buildingType + " inside");
+           Logger.log(this.getClass(), "Building type is Empty");
         }
         else
         {
-            System.out.println("I am " + buildingType);
+            Logger.log(this.getClass(), "Building type is: " + buildingType);
         }
     }
 
@@ -60,7 +60,7 @@ public class Building
             }
             catch (IOException ignored)
             {
-                System.out.println("could not get building sprite");
+                Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
             }
         }
     }
@@ -75,7 +75,7 @@ public class Building
         //TEST
         g2.setColor(Color.white);
         g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY) + cellSize);
-        System.out.println(buildingType + " got drawn at "+ positionX + ", " + positionY);
+        Logger.log(this.getClass(), "Drawing building: " + buildingType);
         getBuildingSprite();
 
         g2.drawImage(testBuilding, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
