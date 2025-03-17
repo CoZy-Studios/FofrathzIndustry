@@ -24,7 +24,6 @@ public class Tile
         }
 
         Logger.log(this.getClass(), "Initializing tile: " + tileType );
-
         drawTile(g2 ,gridPositionX ,gridPositionY);
     }
 

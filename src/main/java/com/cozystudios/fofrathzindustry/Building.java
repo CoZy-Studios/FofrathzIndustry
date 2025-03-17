@@ -11,7 +11,7 @@ public class Building
 {
     private final int cellSize = Grid.cellSize;
     private BufferedImage testBuilding;
-    private BuildingType buildingType;
+    public BuildingType buildingType;
     public BuildingDirection direction;
     public int positionX;
     public int positionY;
@@ -33,7 +33,7 @@ public class Building
         west
     }
 
-    public Building(BuildingType type, Graphics2D g2, int posX, int posY, BuildingDirection buildingDirection)
+    public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection)
     {
         buildingType = type;
         positionX = posX;
@@ -46,7 +46,6 @@ public class Building
         else
         {
             Logger.log(this.getClass(), "Building type is: " + buildingType);
-            drawBuilding(g2);
         }
     }
 
@@ -64,6 +63,11 @@ public class Building
                 Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
             }
         }
+    }
+
+    public void setPosition(Point newPosition){
+        positionX = newPosition.x;
+        positionY = newPosition.y;
     }
 
     public void drawBuilding(Graphics2D g2)
