@@ -22,6 +22,7 @@ public class MouseHandler implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         System.out.println("mouse pressed");
+        Logger.log(this.getClass(), "mouse clicked");
     }
 
     @Override

@@ -44,3 +44,10 @@ Progress:
 - optimized the image loader to prevent ugly code
 - beginning of a uniform naming system for Sprites
 - experimented with adding a sidebar (/new window)
+
+
+
+12/03/25
+- Acknowledgement of forgetting about the devlog
+- Added a custom logger to make debugging easier
+- finally got the breakthrough in the building placing branch

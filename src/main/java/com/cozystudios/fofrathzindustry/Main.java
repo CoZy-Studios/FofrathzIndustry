@@ -39,6 +39,8 @@ public class Main
         gameWindow.setVisible(true);
         UiWindow.setVisible(true);
 
+        Logger.activateLogger();
+
         gamePanel.startGameThread();
     }
 }
