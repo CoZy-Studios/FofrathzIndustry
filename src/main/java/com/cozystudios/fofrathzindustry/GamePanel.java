@@ -2,6 +2,9 @@ package com.cozystudios.fofrathzindustry;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GamePanel extends JPanel implements Runnable
@@ -15,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable
     public int clicked = 0;
 
     private final AtomicBoolean placingBuilding = new AtomicBoolean(false);
+    private List<Building> buildingsToUpdate = new ArrayList<Building>();
 
     public GamePanel(Grid pGrid)
     {
@@ -36,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable
             public void run() {
                 Point initialMousePos = Grid.PointToGrid(mouseHandler.getMousePos());
                 System.out.println("Initial position relative to Grid: X: " + initialMousePos.x + " Y: " + initialMousePos.y + "\n placingBuilding bool: " + placingBuilding.get());
-                Building buildingToPlace = new Building(BuildingType.Test, initialMousePos.x, initialMousePos.y, Building.BuildingDirection.north);
+                Building buildingToPlace = new Building(BuildingType.Test, initialMousePos.x, initialMousePos.y, Building.BuildingDirection.north, TileType.Grass);
 
                 grid.AddBuilding(buildingToPlace);
 
@@ -48,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable
                     if(clicked > 0)
                     {
                         placingBuilding.set(false);
+                        buildingToPlace.SetStandingOnTileType(grid.getGridTileType(mousePos.x, mousePos.y));
                         OnChange(mousePos.x, mousePos.y);
                         break;
                     }
@@ -99,7 +104,79 @@ public class GamePanel extends JPanel implements Runnable
 
     public void OnChange(int PosX, int PosY)
     {
-        grid.SurroundingBuilding(PosX, PosY);
+        SurroundingBuilding(PosX, PosY);
+        for(Building building : buildingsToUpdate)
+        {
+            Objects.requireNonNull(grid.DirectionToBuilding(building.direction, building.positionX, building.positionY)).UpdateInput((Item) building.output, building.outputRate);
+        }
+        buildingsToUpdate.clear();
+
+    }
+
+    public void SurroundingBuilding(int PosX, int PosY)
+    {
+        for(Building building : grid.GetBuildings())
+        {
+            //   0
+            // 0 x 0
+            //   0
+            if(building.positionX == PosX && building.positionY == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   0
+            // x 0 0
+            //   0
+            else if(building.positionX -1 == PosX && building.positionY == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   0
+            // 0 0 x
+            //   0
+            else if(building.positionX +1 == PosX && building.positionY == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   x
+            // 0 0 0
+            //   0
+            else if(building.positionX == PosX && building.positionY -1 == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   0
+            // 0 0 0
+            //   x
+            else if(building.positionX == PosX && building.positionY +1 == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+        }
     }
 
 }

@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Building
@@ -12,17 +14,15 @@ public class Building
     private BufferedImage testBuilding;
     public BuildingType buildingType;
     public BuildingDirection direction;
+    private TileType _standingOnTile;
     public int positionX;
     public int positionY;
 
-    public Building inputSource;
-    public Building OutputTarget;
+    public List<Item> input = new ArrayList<Item>();
+    public Item output;
 
-    public Item input[];
-    public Item output[];
-
-    public float inputRate;
-    public float outputRate;
+    public float inputRate = 0;
+    public float outputRate = 0;
 
     public enum BuildingDirection
     {
@@ -32,12 +32,13 @@ public class Building
         west
     }
 
-    public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection)
+    public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection, TileType pStandingOnTile)
     {
         buildingType = type;
         positionX = posX;
         positionY = posY;
         direction = buildingDirection;
+        _standingOnTile = pStandingOnTile;
         if(buildingType == BuildingType.Empty)
         {
            Logger.log(this.getClass(), "Building type is Empty");
@@ -47,6 +48,25 @@ public class Building
             Logger.log(this.getClass(), "Building type is: " + buildingType);
         }
     }
+
+    public Item getOutput()
+    {
+        switch (buildingType) {
+            case Test, Empty -> {return null;}
+            case Extractor ->
+            {
+                if(Item.TileToItemType(_standingOnTile) != null)
+                {
+                    return new Item(Item.TileToItemType(_standingOnTile));
+                }
+                else return null;
+            }
+            case Manufacturer -> {/*TODO make manufacturer magic*/ return null;}
+            default -> {return input.getFirst();} //Belt is default
+        }
+    }
+
+
 
     public void getBuildingSprite()
     {
@@ -101,7 +121,7 @@ public class Building
         }
     }
 
-    public boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
+    public static boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
     {
         switch (direction) {
             case north -> {return !(0 >= PositionY - 1);}
@@ -117,6 +137,17 @@ public class Building
         Logger.log(this.getClass(), "AffectedByChange");
     }
 
+    public void UpdateInput(Item item, float InputRate)
+    {
+        //TODO add version for when a building is removed
+        //TODO add something to merge multiple inputs
+        if(item != null){
+            inputRate = InputRate;
+            input.add(item);
+        }
+    }
 
-
+    public void SetStandingOnTileType(TileType newType){
+        _standingOnTile = newType;
+    }
 }
