@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Building
@@ -30,6 +31,10 @@ public class Building
         east,
         south,
         west
+    }
+
+    public static String[] getBuildingNames(){
+        return Arrays.toString(BuildingType.values()).replaceAll("^.|.$", "").split(", ");
     }
 
     public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection)
@@ -116,7 +121,4 @@ public class Building
     {
         Logger.log(this.getClass(), "AffectedByChange");
     }
-
-
-
 }

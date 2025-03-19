@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class UiPanel extends JPanel {
     private GamePanel gamePanel;
@@ -28,21 +29,25 @@ public class UiPanel extends JPanel {
         buildingPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10)); // center buttons, add spacing
         buildingPanel.setBorder(BorderFactory.createTitledBorder("Building Menu"));
 
-        String[] buildingTypes = {"Belt", "Manufacturer", "Extractor", "Test"};
+        String[] buildingTypes = Building.getBuildingNames();
 
         for (String building : buildingTypes) {
+            if(Objects.equals(building, "Empty") || Objects.equals(building, "Test"))
+                continue;
+
             JButton buildingButton = new JButton(building);
 
             buildingButton.setPreferredSize(new Dimension(100, 40));
             buildingButton.setFont(new Font("Arial", Font.PLAIN, 14));
             buildingButton.setFocusPainted(false);
-            buildingButton.setToolTipText("Click to place a " + building); // tooltip
+            buildingButton.setMargin(new Insets(1, 0, 1, 0));   // button padding
+            buildingButton.setToolTipText("Place " + building); // tooltip TODO: replace with rates
 
             buildingButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println(building + " button pressed");
-                    //gamePanel.PlacingBuilding(building);
+                    gamePanel.PlacingBuilding(building);
                 }
             });
 
