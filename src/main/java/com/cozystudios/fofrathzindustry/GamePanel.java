@@ -7,16 +7,20 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GamePanel extends JPanel implements Runnable
 {
     Grid grid;
     MouseHandler mouseHandler = new MouseHandler(this);
+    KeyHandler keyHandler = new KeyHandler(this);
 
     Thread gameThread;
 
     int fps = 60;
     public int clicked = 0;
+    public AtomicInteger rotateLeft = new AtomicInteger(0);
+    public AtomicInteger rotateRight = new AtomicInteger(0);
 
     private final AtomicBoolean placingBuilding = new AtomicBoolean(false);
     private List<Building> buildingsToUpdate = new ArrayList<Building>();
@@ -25,6 +29,9 @@ public class GamePanel extends JPanel implements Runnable
     {
         grid = pGrid;
         this.addMouseListener(mouseHandler);
+        this.addKeyListener(keyHandler);
+
+        this.setFocusable(true);
     }
 
     public void startGameThread()
@@ -37,11 +44,14 @@ public class GamePanel extends JPanel implements Runnable
     {
         placingBuilding.set(true);
         clicked = 0;
+        rotateLeft.set(0);
+        rotateRight.set(0);
 
         Thread t = new Thread(new Runnable()
         {
             @Override
             public void run() {
+                requestFocus();
                 Point initialMousePos = Grid.PointToGrid(mouseHandler.getMousePos());
                 System.out.println("Initial position relative to Grid: X: " + initialMousePos.x + " Y: " + initialMousePos.y + "\n placingBuilding bool: " + placingBuilding.get());
                 Building buildingToPlace = new Building(BuildingType.valueOf(buildingName), initialMousePos.x, initialMousePos.y, Building.BuildingDirection.North);
@@ -51,6 +61,17 @@ public class GamePanel extends JPanel implements Runnable
                 while(placingBuilding.get()){
                     Point mousePos = Grid.PointToGrid(mouseHandler.getMousePos());
                     buildingToPlace.setPosition(mousePos);
+
+                    if(rotateLeft.get() > 0){
+                        buildingToPlace.rotateLeft();
+                        rotateLeft.set(0);
+                    }
+
+                    if(rotateRight.get() > 0){
+                        buildingToPlace.rotateRight();
+                        rotateRight.set(0);
+                    }
+
                     repaint();
 
                     if(clicked > 0)
@@ -59,6 +80,12 @@ public class GamePanel extends JPanel implements Runnable
                         buildingToPlace.SetStandingOnTileType(grid.getGridTileType(mousePos.x, mousePos.y));
                         OnChange(mousePos.x, mousePos.y);
                         break;
+                    }
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             }
