@@ -81,14 +81,14 @@ public class Building
 
     public void getBuildingSprite()
     {
-            try
-            {
-                buildingImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
-            }
-            catch (IOException ignored)
-            {
-                Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
-            }
+        try
+        {
+            buildingImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
+        }
+        catch (IOException ignored)
+        {
+            Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
+        }
     }
 
     public void setPosition(Point newPosition){
@@ -116,6 +116,8 @@ public class Building
             case South -> direction = BuildingDirection.West;
             case West -> direction = BuildingDirection.North;
         }
+
+        getBuildingSprite();
     }
     public void rotateLeft()
     {
@@ -125,6 +127,8 @@ public class Building
             case South -> direction = BuildingDirection.East;
             case West -> direction = BuildingDirection.South;
         }
+
+        getBuildingSprite();
     }
 
     public static boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
