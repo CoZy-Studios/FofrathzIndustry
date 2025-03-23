@@ -38,13 +38,12 @@ public class Building
     }
 
 
-    public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection, TileType pStandingOnTile)
+    public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection)
     {
         buildingType = type;
         positionX = posX;
         positionY = posY;
         direction = buildingDirection;
-        _standingOnTile = pStandingOnTile;
         if(buildingType == BuildingType.Empty)
         {
            Logger.log(this.getClass(), "Building type is Empty");
@@ -68,7 +67,11 @@ public class Building
                 else return null;
             }
             case Manufacturer -> {/*TODO make manufacturer magic*/ return null;}
-            default -> {return input.getFirst();} //Belt is default
+            default ->
+            {
+                if(!input.isEmpty()) return input.getFirst();
+                else return null;
+            } //Belt is default
         }
     }
 
@@ -76,9 +79,6 @@ public class Building
 
     public void getBuildingSprite()
     {
-
-        if(buildingType == BuildingType.Test)
-        {
             try
             {
                 testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
@@ -87,7 +87,6 @@ public class Building
             {
                 Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
             }
-        }
     }
 
     public void setPosition(Point newPosition){

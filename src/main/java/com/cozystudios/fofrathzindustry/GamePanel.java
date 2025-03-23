@@ -107,7 +107,13 @@ public class GamePanel extends JPanel implements Runnable
         SurroundingBuilding(PosX, PosY);
         for(Building building : buildingsToUpdate)
         {
-            Objects.requireNonNull(grid.DirectionToBuilding(building.direction, building.positionX, building.positionY)).UpdateInput((Item) building.output, building.outputRate);
+            Building nextBuilding = grid.DirectionToBuilding(building.direction, building.positionX, building.positionY);
+            //Objects.requireNonNull(grid.DirectionToBuilding(building.direction, building.positionX, building.positionY)).UpdateInput((Item) building.output, building.outputRate);
+            if(nextBuilding != null)
+            {
+                nextBuilding.UpdateInput((Item) building.output, building.outputRate);
+                Logger.log(this.getClass(), "Building: " + building.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item:" + (Item) building.output);
+            }
         }
         buildingsToUpdate.clear();
 
