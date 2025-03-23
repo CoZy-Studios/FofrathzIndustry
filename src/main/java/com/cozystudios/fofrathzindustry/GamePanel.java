@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -105,18 +106,25 @@ public class GamePanel extends JPanel implements Runnable
     public void OnChange(int PosX, int PosY)
     {
         SurroundingBuilding(PosX, PosY);
-        for(Building building : buildingsToUpdate)
+        ListIterator<Building> updateListIterator = buildingsToUpdate.listIterator();
+
+        while (updateListIterator.hasNext())
         {
+            Building building = updateListIterator.next();
             Building nextBuilding = grid.DirectionToBuilding(building.direction, building.positionX, building.positionY);
-            //Objects.requireNonNull(grid.DirectionToBuilding(building.direction, building.positionX, building.positionY)).UpdateInput((Item) building.output, building.outputRate);
             if(nextBuilding != null)
             {
                 nextBuilding.UpdateInput((Item) building.output, building.outputRate);
                 Logger.log(this.getClass(), "Building: " + building.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item:" + (Item) building.output);
+
+                if(nextBuilding.buildingType == BuildingType.Belt && !buildingsToUpdate.contains(nextBuilding))
+                {
+                    Logger.log(this.getClass(), "added Next Belt to update");
+                    updateListIterator.add(nextBuilding);
+                }
             }
         }
         buildingsToUpdate.clear();
-
     }
 
     public void SurroundingBuilding(int PosX, int PosY)
