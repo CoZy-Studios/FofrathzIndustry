@@ -55,17 +55,13 @@ public class Building
 
     public void getBuildingSprite()
     {
-
-        if(buildingType == BuildingType.Test)
+        try
         {
-            try
-            {
-                testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
-            }
-            catch (IOException ignored)
-            {
-                Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
-            }
+            testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
+        }
+        catch (IOException ignored)
+        {
+            Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
         }
     }
 
