@@ -27,16 +27,19 @@ public class GamePanel extends JPanel implements Runnable
         this.addMouseListener(mouseHandler);
     }
 
-    public void startGameThread(){
+    public void startGameThread()
+    {
         gameThread = new Thread(this);
         gameThread.run();
     }
 
-    public void PlacingBuilding(String buildingName){
+    public void PlacingBuilding(String buildingName)
+    {
         placingBuilding.set(true);
         clicked = 0;
 
-        Thread t = new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable()
+        {
             @Override
             public void run() {
                 Point initialMousePos = Grid.PointToGrid(mouseHandler.getMousePos());
@@ -64,9 +67,7 @@ public class GamePanel extends JPanel implements Runnable
         t.start();
     }
 
-    public void Update(){
-
-    }
+    public void Update(){}
 
     public void paintComponent(Graphics g)
     {
@@ -80,7 +81,8 @@ public class GamePanel extends JPanel implements Runnable
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
         double drawInterval = (double) 1000000000 / fps;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
@@ -111,20 +113,22 @@ public class GamePanel extends JPanel implements Runnable
         while (updateListIterator.hasNext())
         {
             Building building = updateListIterator.next();
-            Building nextBuilding = grid.DirectionToBuilding(building.direction, building.positionX, building.positionY);
-            if(nextBuilding != null)
-            {
-                nextBuilding.UpdateInput((Item) building.output, building.outputRate);
-                Logger.log(this.getClass(), "Building: " + building.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item:" + (Item) building.output);
-
-                if(nextBuilding.buildingType == BuildingType.Belt && !buildingsToUpdate.contains(nextBuilding))
-                {
-                    Logger.log(this.getClass(), "added Next Belt to update");
-                    updateListIterator.add(nextBuilding);
-                }
-            }
+            updateBuildingChain(building);
         }
         buildingsToUpdate.clear();
+    }
+
+
+    private void updateBuildingChain(Building currentBuilding)
+    {
+        Building nextBuilding = grid.DirectionToBuilding(currentBuilding.direction, currentBuilding.positionX, currentBuilding.positionY);
+
+        if (nextBuilding != null)
+        {
+            nextBuilding.UpdateInput((Item) currentBuilding.output, currentBuilding.outputRate);
+            Logger.log(this.getClass(), "Building: " + currentBuilding.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item: " + (Item) currentBuilding.output);
+            updateBuildingChain(nextBuilding);
+        }
     }
 
     public void SurroundingBuilding(int PosX, int PosY)
