@@ -27,10 +27,10 @@ public class Building
 
     public enum BuildingDirection
     {
-        north,
-        east,
-        south,
-        west
+        North,
+        East,
+        South,
+        West
     }
 
     public static String[] getBuildingNames(){
@@ -86,29 +86,29 @@ public class Building
     {
         switch (direction)
         {
-            case north -> direction = BuildingDirection.east;
-            case east -> direction = BuildingDirection.south;
-            case south -> direction = BuildingDirection.west;
-            case west -> direction = BuildingDirection.north;
+            case North -> direction = BuildingDirection.East;
+            case East -> direction = BuildingDirection.South;
+            case South -> direction = BuildingDirection.West;
+            case West -> direction = BuildingDirection.North;
         }
     }
     public void rotateLeft()
     {
         switch (direction) {
-            case north -> direction = BuildingDirection.west;
-            case east -> direction = BuildingDirection.north;
-            case south -> direction = BuildingDirection.east;
-            case west -> direction = BuildingDirection.south;
+            case North -> direction = BuildingDirection.West;
+            case East -> direction = BuildingDirection.North;
+            case South -> direction = BuildingDirection.East;
+            case West -> direction = BuildingDirection.South;
         }
     }
 
     public boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
     {
         switch (direction) {
-            case north -> {return !(0 >= PositionY - 1);}
-            case east -> {return !(Grid.columns >= PositionX+1);}
-            case south -> {return !(Grid.rows >= PositionY+1);}
-            case west -> {return !(0 >= PositionX-1);}
+            case North -> {return !(0 >= PositionY - 1);}
+            case East -> {return !(Grid.columns >= PositionX+1);}
+            case South -> {return !(Grid.rows >= PositionY+1);}
+            case West -> {return !(0 >= PositionX-1);}
             default -> {throw new RuntimeException("Invalid direction for In Bounds Check");}
         }
     }
