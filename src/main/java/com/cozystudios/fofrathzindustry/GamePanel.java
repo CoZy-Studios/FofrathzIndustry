@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable
         gameThread.run();
     }
 
-    public void PlacingBuilding(){
+    public void PlacingBuilding(String buildingName){
         placingBuilding.set(true);
         clicked = 0;
 
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable
             public void run() {
                 Point initialMousePos = Grid.PointToGrid(mouseHandler.getMousePos());
                 System.out.println("Initial position relative to Grid: X: " + initialMousePos.x + " Y: " + initialMousePos.y + "\n placingBuilding bool: " + placingBuilding.get());
-                Building buildingToPlace = new Building(BuildingType.Test, initialMousePos.x, initialMousePos.y, Building.BuildingDirection.north);
+                Building buildingToPlace = new Building(BuildingType.valueOf(buildingName), initialMousePos.x, initialMousePos.y, Building.BuildingDirection.north);
 
                 grid.AddBuilding(buildingToPlace);
 
