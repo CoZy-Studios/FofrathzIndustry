@@ -125,8 +125,8 @@ public class GamePanel extends JPanel implements Runnable
 
         if (nextBuilding != null)
         {
-            nextBuilding.UpdateInput((Item) currentBuilding.output, currentBuilding.outputRate);
-            Logger.log(this.getClass(), "Building: " + currentBuilding.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item: " + (Item) currentBuilding.output);
+            nextBuilding.UpdateInput((Item) currentBuilding.getOutput(), currentBuilding.outputRate);
+            Logger.log(this.getClass(), "Building: " + currentBuilding.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item: " + (Item) currentBuilding.getOutput());
             updateBuildingChain(nextBuilding);
         }
     }

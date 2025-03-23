@@ -20,7 +20,7 @@ public class Building
     public int positionY;
 
     public List<Item> input = new ArrayList<Item>();
-    public Item output;
+
 
     public float inputRate = 0;
     public float outputRate = 0;
