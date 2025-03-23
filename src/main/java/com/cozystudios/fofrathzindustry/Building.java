@@ -51,6 +51,8 @@ public class Building
         {
             Logger.log(this.getClass(), "Building type is: " + buildingType);
         }
+
+        getBuildingSprite();
     }
 
     public void getBuildingSprite()
@@ -76,7 +78,6 @@ public class Building
         g2.setColor(Color.white);
         g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY) + cellSize);
         Logger.log(this.getClass(), "Drawing building: " + buildingType);
-        getBuildingSprite();
 
         g2.drawImage(buildingImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
 
