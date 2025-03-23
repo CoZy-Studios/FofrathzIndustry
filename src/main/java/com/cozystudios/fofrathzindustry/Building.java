@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Building
 {
     private final int cellSize = Grid.cellSize;
-    private BufferedImage testBuilding;
+    private BufferedImage buildingImage;
     public BuildingType buildingType;
     public BuildingDirection direction;
     public int positionX;
@@ -55,18 +55,14 @@ public class Building
 
     public void getBuildingSprite()
     {
-
-        if(buildingType == BuildingType.Test)
-        {
             try
             {
-                testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
+                buildingImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
             }
             catch (IOException ignored)
             {
                 Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
             }
-        }
     }
 
     public void setPosition(Point newPosition){
@@ -82,7 +78,7 @@ public class Building
         Logger.log(this.getClass(), "Drawing building: " + buildingType);
         getBuildingSprite();
 
-        g2.drawImage(testBuilding, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
+        g2.drawImage(buildingImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
 
     }
 
