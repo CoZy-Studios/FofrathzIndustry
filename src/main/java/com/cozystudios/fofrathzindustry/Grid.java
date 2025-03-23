@@ -26,6 +26,32 @@ public class Grid
         return (int)Math.floor(coordinate / cellSize) + 1;
     }
 
+    public Building DirectionToBuilding(Building.BuildingDirection direction, int thisPosX , int thisPosY)
+    {
+        if(Building.isTargetInBounds(direction, thisPosX, thisPosY))
+        {
+            int targetPosX = thisPosX;
+            int targetPosY = thisPosY;
+
+            switch (direction) {
+                case north -> { targetPosY -= 1;}
+                case east -> { targetPosX += 1;}
+                case south -> {targetPosY += 1;}
+                case west -> {targetPosX -= 1;}
+            }
+
+            for(Building building : GetBuildings())
+            {
+                if(building.positionX == targetPosX && building.positionY == targetPosY)
+                {
+                    return building;
+                }
+            }
+
+        }
+        return null;
+    }
+
     public static Point PointToGrid(Point point){
         return new Point(CoordinateToGrid(point.x), CoordinateToGrid(point.y));
     }
@@ -80,34 +106,7 @@ public class Grid
         System.out.println("Added building to building List: " + building.buildingType);
     }
 
-    public void SurroundingBuilding(int PosX, int PosY)
-    {
-        for(Building building : GetBuildings())
-        {
-            //   0
-            // 0 x 0
-            //   0
-            if(building.positionX == PosX && building.positionY == PosY){building.AffectedByChange();}
-
-            //   0
-            // x 0 0
-            //   0
-            else if(building.positionX -1 == PosX && building.positionY == PosY){building.AffectedByChange();}
-
-            //   0
-            // 0 0 x
-            //   0
-            else if(building.positionX +1 == PosX && building.positionY == PosY){building.AffectedByChange();}
-
-            //   x
-            // 0 0 0
-            //   0
-            else if(building.positionX == PosX && building.positionY -1 == PosY){building.AffectedByChange();}
-
-            //   0
-            // 0 0 0
-            //   x
-            else if(building.positionX == PosX && building.positionY +1 == PosY){ building.AffectedByChange(); }
-        }
+    public TileType getGridTileType(int posX, int posY){
+        return localGrid[posX][posY].GetTileType();
     }
 }

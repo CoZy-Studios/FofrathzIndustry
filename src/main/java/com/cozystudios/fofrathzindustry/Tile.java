@@ -33,4 +33,8 @@ public class Tile
         g2.fillRect((positionX - 1) * Grid.cellSize + 1, (positionY - 1) * Grid.cellSize + 1, Grid.cellSize - 1, Grid.cellSize - 1);
         Logger.log(this.getClass(), "Drawing tile: " + tileType );
     }
+
+    public TileType GetTileType(){
+        return tileType;
+    }
 }

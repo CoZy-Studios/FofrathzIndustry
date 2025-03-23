@@ -51,3 +51,11 @@ Progress:
 - Acknowledgement of forgetting about the devlog
 - Added a custom logger to make debugging easier
 - finally got the breakthrough in the building placing branch
+
+18/03/25
+- getOutput
+- UpdateInput(WIP), still need cases for removal, and whatever else might turn up
+- Moved SuroundingBuilding to game panel
+- OnChange updater
+- directionToBuilding
+- Item actually has code now, not just a type

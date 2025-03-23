@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -13,17 +15,15 @@ public class Building
     private BufferedImage buildingImage;
     public BuildingType buildingType;
     public BuildingDirection direction;
+    private TileType _standingOnTile;
     public int positionX;
     public int positionY;
 
-    public Building inputSource;
-    public Building OutputTarget;
+    public List<Item> input = new ArrayList<Item>();
 
-    public Item input[];
-    public Item output[];
 
-    public float inputRate;
-    public float outputRate;
+    public float inputRate = 0;
+    public float outputRate = 0;
 
     public enum BuildingDirection
     {
@@ -36,6 +36,7 @@ public class Building
     public static String[] getBuildingNames(){
         return Arrays.toString(BuildingType.values()).replaceAll("^.|.$", "").split(", ");
     }
+
 
     public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection)
     {
@@ -54,6 +55,29 @@ public class Building
 
         getBuildingSprite();
     }
+
+    public Item getOutput()
+    {
+        switch (buildingType) {
+            case Test, Empty -> {return null;}
+            case Extractor ->
+            {
+                if(Item.TileToItemType(_standingOnTile) != null)
+                {
+                    return new Item(Item.TileToItemType(_standingOnTile));
+                }
+                else return null;
+            }
+            case Manufacturer -> {/*TODO make manufacturer magic*/ return null;}
+            default ->
+            {
+                if(!input.isEmpty()) return input.getFirst();
+                else return null;
+            } //Belt is default
+        }
+    }
+
+
 
     public void getBuildingSprite()
     {
@@ -103,7 +127,7 @@ public class Building
         }
     }
 
-    public boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
+    public static boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
     {
         switch (direction) {
             case North -> {return !(0 >= PositionY - 1);}
@@ -117,5 +141,19 @@ public class Building
     public void AffectedByChange()
     {
         Logger.log(this.getClass(), "AffectedByChange");
+    }
+
+    public void UpdateInput(Item item, float InputRate)
+    {
+        //TODO add version for when a building is removed
+        //TODO add something to merge multiple inputs
+        if(item != null){
+            inputRate = InputRate;
+            input.add(item);
+        }
+    }
+
+    public void SetStandingOnTileType(TileType newType){
+        _standingOnTile = newType;
     }
 }
