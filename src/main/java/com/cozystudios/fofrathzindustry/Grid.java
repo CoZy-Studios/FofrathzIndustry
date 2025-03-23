@@ -34,10 +34,10 @@ public class Grid
             int targetPosY = thisPosY;
 
             switch (direction) {
-                case north -> { targetPosY -= 1;}
-                case east -> { targetPosX += 1;}
-                case south -> {targetPosY += 1;}
-                case west -> {targetPosX -= 1;}
+                case North -> { targetPosY -= 1;}
+                case East -> { targetPosX += 1;}
+                case South -> {targetPosY += 1;}
+                case West -> {targetPosX -= 1;}
             }
 
             for(Building building : GetBuildings())
