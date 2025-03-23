@@ -2,6 +2,10 @@ package com.cozystudios.fofrathzindustry;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,6 +23,7 @@ public class GamePanel extends JPanel implements Runnable
     public AtomicInteger rotateRight = new AtomicInteger(0);
 
     private final AtomicBoolean placingBuilding = new AtomicBoolean(false);
+    private List<Building> buildingsToUpdate = new ArrayList<Building>();
 
     public GamePanel(Grid pGrid)
     {
@@ -29,24 +34,27 @@ public class GamePanel extends JPanel implements Runnable
         this.setFocusable(true);
     }
 
-    public void startGameThread(){
+    public void startGameThread()
+    {
         gameThread = new Thread(this);
         gameThread.run();
     }
 
-    public void PlacingBuilding(String buildingName){
+    public void PlacingBuilding(String buildingName)
+    {
         placingBuilding.set(true);
         clicked = 0;
         rotateLeft.set(0);
         rotateRight.set(0);
 
-        Thread t = new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable()
+        {
             @Override
             public void run() {
                 requestFocus();
                 Point initialMousePos = Grid.PointToGrid(mouseHandler.getMousePos());
                 System.out.println("Initial position relative to Grid: X: " + initialMousePos.x + " Y: " + initialMousePos.y + "\n placingBuilding bool: " + placingBuilding.get());
-                Building buildingToPlace = new Building(BuildingType.valueOf(buildingName), initialMousePos.x, initialMousePos.y, Building.BuildingDirection.north);
+                Building buildingToPlace = new Building(BuildingType.valueOf(buildingName), initialMousePos.x, initialMousePos.y, Building.BuildingDirection.North);
 
                 grid.AddBuilding(buildingToPlace);
 
@@ -69,6 +77,7 @@ public class GamePanel extends JPanel implements Runnable
                     if(clicked > 0)
                     {
                         placingBuilding.set(false);
+                        buildingToPlace.SetStandingOnTileType(grid.getGridTileType(mousePos.x, mousePos.y));
                         OnChange(mousePos.x, mousePos.y);
                         break;
                     }
@@ -85,9 +94,7 @@ public class GamePanel extends JPanel implements Runnable
         t.start();
     }
 
-    public void Update(){
-
-    }
+    public void Update(){}
 
     public void paintComponent(Graphics g)
     {
@@ -101,7 +108,8 @@ public class GamePanel extends JPanel implements Runnable
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
         double drawInterval = (double) 1000000000 / fps;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
@@ -126,7 +134,94 @@ public class GamePanel extends JPanel implements Runnable
 
     public void OnChange(int PosX, int PosY)
     {
-        grid.SurroundingBuilding(PosX, PosY);
+        SurroundingBuilding(PosX, PosY);
+        ListIterator<Building> updateListIterator = buildingsToUpdate.listIterator();
+
+        while (updateListIterator.hasNext())
+        {
+            Building building = updateListIterator.next();
+            updateBuildingChain(building);
+        }
+        buildingsToUpdate.clear();
+    }
+
+
+    private void updateBuildingChain(Building currentBuilding)
+    {
+        Building nextBuilding = grid.DirectionToBuilding(currentBuilding.direction, currentBuilding.positionX, currentBuilding.positionY);
+
+        if (nextBuilding != null)
+        {
+            nextBuilding.UpdateInput((Item) currentBuilding.getOutput(), currentBuilding.outputRate);
+            Logger.log(this.getClass(), "Building: " + currentBuilding.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item: " + (Item) currentBuilding.getOutput());
+            updateBuildingChain(nextBuilding);
+        }
+    }
+
+    public void SurroundingBuilding(int PosX, int PosY)
+    {
+        for(Building building : grid.GetBuildings())
+        {
+            //   0
+            // 0 x 0
+            //   0
+            if(building.positionX == PosX && building.positionY == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   0
+            // x 0 0
+            //   0
+            else if(building.positionX -1 == PosX && building.positionY == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   0
+            // 0 0 x
+            //   0
+            else if(building.positionX +1 == PosX && building.positionY == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   x
+            // 0 0 0
+            //   0
+            else if(building.positionX == PosX && building.positionY -1 == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+
+            //   0
+            // 0 0 0
+            //   x
+            else if(building.positionX == PosX && building.positionY +1 == PosY)
+            {
+                building.AffectedByChange();
+                if(building.getOutput() != null)
+                {
+                    buildingsToUpdate.add(building);
+                }
+            }
+        }
     }
 
 }

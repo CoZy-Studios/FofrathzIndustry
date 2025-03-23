@@ -4,38 +4,39 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Building
 {
     private final int cellSize = Grid.cellSize;
-    private BufferedImage testBuilding;
+    private BufferedImage buildingImage;
     public BuildingType buildingType;
     public BuildingDirection direction;
+    private TileType _standingOnTile;
     public int positionX;
     public int positionY;
 
-    public Building inputSource;
-    public Building OutputTarget;
+    public List<Item> input = new ArrayList<Item>();
 
-    public Item input[];
-    public Item output[];
 
-    public float inputRate;
-    public float outputRate;
+    public float inputRate = 0;
+    public float outputRate = 0;
 
     public enum BuildingDirection
     {
-        north,
-        east,
-        south,
-        west
+        North,
+        East,
+        South,
+        West
     }
 
     public static String[] getBuildingNames(){
         return Arrays.toString(BuildingType.values()).replaceAll("^.|.$", "").split(", ");
     }
+
 
     public Building(BuildingType type, int posX, int posY, BuildingDirection buildingDirection)
     {
@@ -51,18 +52,43 @@ public class Building
         {
             Logger.log(this.getClass(), "Building type is: " + buildingType);
         }
+
+        getBuildingSprite();
     }
+
+    public Item getOutput()
+    {
+        switch (buildingType) {
+            case Test, Empty -> {return null;}
+            case Extractor ->
+            {
+                if(Item.TileToItemType(_standingOnTile) != null)
+                {
+                    return new Item(Item.TileToItemType(_standingOnTile));
+                }
+                else return null;
+            }
+            case Manufacturer -> {/*TODO make manufacturer magic*/ return null;}
+            default ->
+            {
+                if(!input.isEmpty()) return input.getFirst();
+                else return null;
+            } //Belt is default
+        }
+    }
+
+
 
     public void getBuildingSprite()
     {
-        try
-        {
-            testBuilding = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
-        }
-        catch (IOException ignored)
-        {
-            Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
-        }
+            try
+            {
+                buildingImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
+            }
+            catch (IOException ignored)
+            {
+                Logger.log(this.getClass(), "Could not load Building_"+ buildingType.toString() + ".png");
+            }
     }
 
     public void setPosition(Point newPosition){
@@ -76,9 +102,8 @@ public class Building
         g2.setColor(Color.white);
         g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY) + cellSize);
         Logger.log(this.getClass(), "Drawing building: " + buildingType);
-        getBuildingSprite();
 
-        g2.drawImage(testBuilding, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
+        g2.drawImage(buildingImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
 
     }
 
@@ -86,29 +111,29 @@ public class Building
     {
         switch (direction)
         {
-            case north -> direction = BuildingDirection.east;
-            case east -> direction = BuildingDirection.south;
-            case south -> direction = BuildingDirection.west;
-            case west -> direction = BuildingDirection.north;
+            case North -> direction = BuildingDirection.East;
+            case East -> direction = BuildingDirection.South;
+            case South -> direction = BuildingDirection.West;
+            case West -> direction = BuildingDirection.North;
         }
     }
     public void rotateLeft()
     {
         switch (direction) {
-            case north -> direction = BuildingDirection.west;
-            case east -> direction = BuildingDirection.north;
-            case south -> direction = BuildingDirection.east;
-            case west -> direction = BuildingDirection.south;
+            case North -> direction = BuildingDirection.West;
+            case East -> direction = BuildingDirection.North;
+            case South -> direction = BuildingDirection.East;
+            case West -> direction = BuildingDirection.South;
         }
     }
 
-    public boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
+    public static boolean isTargetInBounds(BuildingDirection direction, int PositionX, int PositionY)
     {
         switch (direction) {
-            case north -> {return !(0 >= PositionY - 1);}
-            case east -> {return !(Grid.columns >= PositionX+1);}
-            case south -> {return !(Grid.rows >= PositionY+1);}
-            case west -> {return !(0 >= PositionX-1);}
+            case North -> {return !(0 >= PositionY - 1);}
+            case East -> {return !(Grid.columns >= PositionX+1);}
+            case South -> {return !(Grid.rows >= PositionY+1);}
+            case West -> {return !(0 >= PositionX-1);}
             default -> {throw new RuntimeException("Invalid direction for In Bounds Check");}
         }
     }
@@ -116,5 +141,19 @@ public class Building
     public void AffectedByChange()
     {
         Logger.log(this.getClass(), "AffectedByChange");
+    }
+
+    public void UpdateInput(Item item, float InputRate)
+    {
+        //TODO add version for when a building is removed
+        //TODO add something to merge multiple inputs
+        if(item != null){
+            inputRate = InputRate;
+            input.add(item);
+        }
+    }
+
+    public void SetStandingOnTileType(TileType newType){
+        _standingOnTile = newType;
     }
 }
