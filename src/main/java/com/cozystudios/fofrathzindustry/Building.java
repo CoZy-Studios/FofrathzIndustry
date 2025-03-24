@@ -99,8 +99,8 @@ public class Building
     public void drawBuilding(Graphics2D g2)
     {
         //TEST
-        g2.setColor(Color.white);
-        g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY) + cellSize);
+        //g2.setColor(Color.white);
+        //g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY) + cellSize);
         Logger.log(this.getClass(), "Drawing building: " + buildingType);
 
         g2.drawImage(buildingImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
