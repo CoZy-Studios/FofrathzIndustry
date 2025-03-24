@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable
 
     int fps = 60;
     public int clicked = 0;
+    public int deletePressed = 0;
     public AtomicInteger rotateLeft = new AtomicInteger(0);
     public AtomicInteger rotateRight = new AtomicInteger(0);
 
@@ -96,7 +97,17 @@ public class GamePanel extends JPanel implements Runnable
         t.start();
     }
 
-    public void Update(){}
+    public void Update(){
+        if(deletePressed > 0){
+            Point mousePos = mouseHandler.getMousePos();
+            mousePos = new Point(grid.CoordinateToGrid(mousePos.x), grid.CoordinateToGrid(mousePos.y));
+            grid.removeBuildingAt(mousePos);
+            repaint();
+            deletePressed = 0;
+
+            Logger.log(this.getClass(), "Deleting; Mouse: " + mousePos.x+ " " + mousePos.y);
+        }
+    }
 
     public void paintComponent(Graphics g)
     {

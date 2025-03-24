@@ -16,6 +16,7 @@ public class Logger {
         //addClassToLogger(MouseHandler.class);
         //addClassToLogger(Building.class);
         //addClassToLogger(KeyHandler.class);
+        addClassToLogger(GamePanel.class);
         addClassToLogger(Grid.class);
     }
 
