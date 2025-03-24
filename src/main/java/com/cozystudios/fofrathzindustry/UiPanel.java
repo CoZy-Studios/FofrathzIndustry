@@ -47,7 +47,10 @@ public class UiPanel extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println(building + " button pressed");
+                    if(!gamePanel.placingBuilding.get())
+                    {
                     gamePanel.PlacingBuilding(building);
+                    }
                 }
             });
 

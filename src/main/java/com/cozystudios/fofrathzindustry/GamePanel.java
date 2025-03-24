@@ -22,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable
     public AtomicInteger rotateLeft = new AtomicInteger(0);
     public AtomicInteger rotateRight = new AtomicInteger(0);
 
-    private final AtomicBoolean placingBuilding = new AtomicBoolean(false);
+    public final AtomicBoolean placingBuilding = new AtomicBoolean(false);
     private List<Building> buildingsToUpdate = new ArrayList<Building>();
 
     public GamePanel(Grid pGrid)
