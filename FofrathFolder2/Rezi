@@ -6,6 +6,8 @@ problems:
 - UI related code is very janky (ask SzyZuu for more information)
 - keyhandlers randomly not working 
 - random map generation has a chance to create a map that is impossible to play (no ores)
+- random merge errors (half of the devlog dissapeared, as well as a lot of code)
+- devlog shouldve been kept better
 
 what went well
 - logic code having the tendency to work on the first try (like OnChange) thanks to planning ahead
