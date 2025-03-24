@@ -71,7 +71,7 @@ public class Building
             case Manufacturer -> {/*TODO make manufacturer magic*/ return null;}
             default ->
             {
-                if(!input.isEmpty()) return input.getFirst();
+                if(!input.isEmpty()) return input.get(0);
                 else return null;
             } //Belt is default
         }
