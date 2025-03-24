@@ -106,6 +106,20 @@ public class Grid
         System.out.println("Added building to building List: " + building.buildingType);
     }
 
+    public void removeBuildingAt(Point point){
+        Building toRemove = null;
+        for(Building building : _buildings){
+            if(building.positionX == point.x && building.positionY == point.y){
+                toRemove = building;
+            }
+        }
+
+        if(toRemove != null){
+            _buildings.remove(toRemove);
+            Logger.log(this.getClass(), "Tried removing building at: " + toRemove.positionX + "X, " + toRemove.positionY + "Y");
+        }
+    }
+
     public TileType getGridTileType(int posX, int posY){
         return localGrid[posX][posY].GetTileType();
     }

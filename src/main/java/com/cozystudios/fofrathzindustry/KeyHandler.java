@@ -26,6 +26,10 @@ public class KeyHandler implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_E){
             gamePanel.rotateRight.set(1);
         }
+
+        if(e.getKeyCode() == KeyEvent.VK_D){
+            gamePanel.deletePressed++;
+        }
     }
 
     @Override

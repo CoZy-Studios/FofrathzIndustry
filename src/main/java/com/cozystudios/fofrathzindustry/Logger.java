@@ -13,9 +13,11 @@ public class Logger {
         //Just add the classes here you want to have checked
         // addClassToLogger(Classname.class)
         addClassToLogger(Logger.class);
-        addClassToLogger(MouseHandler.class);
-        addClassToLogger(Building.class);
-        addClassToLogger(KeyHandler.class);
+        //addClassToLogger(MouseHandler.class);
+        //addClassToLogger(Building.class);
+        //addClassToLogger(KeyHandler.class);
+        addClassToLogger(GamePanel.class);
+        addClassToLogger(Grid.class);
     }
 
     public static void addClassToLogger(Class loggedClass)
