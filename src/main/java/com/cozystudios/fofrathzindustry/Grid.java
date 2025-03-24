@@ -26,6 +26,21 @@ public class Grid
         return (int)Math.floor(coordinate / cellSize) + 1;
     }
 
+    public boolean tileInUse(int x, int y, Building buildingToPlace)
+    {
+        if(!GetBuildings().isEmpty()) {
+            Logger.log(this.getClass(), "buildings not empty");
+            for (Building building : GetBuildings()) {
+                if (building.positionX == x && building.positionY ==y && building != buildingToPlace) {
+                    Logger.log(this.getClass(), "Tile " + building.positionX + ", " + building.positionY + " is in use");
+                    return true;
+                }
+            }
+            Logger.log(this.getClass(), "Tile " + x + ", " + y + " is not in use");
+        }
+        return false;
+    }
+
     public Building DirectionToBuilding(Building.BuildingDirection direction, int thisPosX , int thisPosY)
     {
         if(Building.isTargetInBounds(direction, thisPosX, thisPosY))

@@ -76,10 +76,13 @@ public class GamePanel extends JPanel implements Runnable
 
                     if(clicked > 0)
                     {
-                        placingBuilding.set(false);
-                        buildingToPlace.SetStandingOnTileType(grid.getGridTileType(mousePos.x, mousePos.y));
-                        OnChange(mousePos.x, mousePos.y);
-                        break;
+                        clicked = 0;
+                        if(!grid.tileInUse(mousePos.x, mousePos.y, buildingToPlace)) {
+                            placingBuilding.set(false);
+                            buildingToPlace.SetStandingOnTileType(grid.getGridTileType(mousePos.x, mousePos.y));
+                            OnChange(mousePos.x, mousePos.y);
+                            break;
+                        }
                     }
 
                     try {
@@ -90,7 +93,6 @@ public class GamePanel extends JPanel implements Runnable
                 }
             }
         });
-
         t.start();
     }
 
