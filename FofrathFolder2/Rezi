@@ -18,3 +18,13 @@ what went well
 - few comments in code, only to make certain things easier to see without bloating the code
 - overall little bloat
 - good centralisation of code, keeping most logic outside of the frequently instantiated objects
+
+ideas for future projects:
+- create a bot / script that automatically writes a devlog based on comit messages, maintaining the devlog is a time waste, but for note taking, future references and a good commit farm (same with rezi)
+- use a better structure for the files, to have scripts and sprites grouped better (compare to other CozyStudios project (infectism), even i hate to admit it but MC forces pretty good structure)
+- use laptops / remote desktops more often instead of school pcs, because holy sh*t they're horrendous to use
+- taking more breaks within the coding sessions, as it‘s proven to help with thinking of solutions for problems
+- work more often / regularly on the project (my commit schedule is awful)
+- commit more often, to have more possibilites for rollbacks (and more stats)
+- better commit messages (looking at you SzyZuu, tho tbf im not perfect either)
+- planning, not just better planning but planning overall, since some issues were tackled without a (written/sketched) plan
