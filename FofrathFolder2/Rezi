@@ -1,0 +1,18 @@
+Reflection
+
+problems:
+- School PCs are trash, they can neither handle the game smoothly, nor is their java version up to date, leading to frequent errors (".getFirst()" doesnt exist for school computers)
+- Random small logic errors that take hours to fix (normal coding experience)
+- UI related code is very janky (ask SzyZuu for more information)
+- keyhandlers randomly not working 
+- random map generation has a chance to create a map that is impossible to play (no ores)
+
+what went well
+- logic code having the tendency to work on the first try (like OnChange) thanks to planning ahead
+- good structure for file / sprite handling -> could be improved by using folders, especially in the src/main/java/com/cozystudios/fofrathzindustry
+- creation of a custom Logger instead of system.out.printLn(), for improved debugging potential (filterable by class, easily disableable to prevent the clogging of the console, without losing any capability that print has) 
+- random map generation
+- good limiting of the scope for the game, no crunch was necessary to get our product to the state it is in right now
+- few comments in code, only to make certain things easier to see without bloating the code
+- overall little bloat
+- good centralisation of code, keeping most logic outside of the frequently instantiated objects
