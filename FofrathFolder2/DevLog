@@ -11,7 +11,7 @@ Progress:
 - tile types exist now
 - color (randomized to be less monotonous) for the tiles
 
-19/91/25
+19/01/25
 - R began at 13:00, took a break 14:30
 
 - cleaned up some code
@@ -21,14 +21,14 @@ Progress:
 - added copper color
 - tried rendering building Sprites
 
-20/1/25
+20/01/25
 - R 10:30 - 11:40
 
 - fixed redundancies
 - implemented sprite loading
 - created Building grid (filled with empty buildings)
 
-21/1/25
+21/01/25
 - R 10:00 - 11:00
 
 - fixed Grid rendering, the "hasBeenGenerated" randomly breaks
@@ -45,7 +45,7 @@ Progress:
 - beginning of a uniform naming system for Sprites
 - experimented with adding a sidebar (/new window)
 
-
+///DevLog Text between these two segments went missing thanks to merge errors (i love github)
 
 12/03/25
 - Acknowledgement of forgetting about the devlog
@@ -59,3 +59,18 @@ Progress:
 - OnChange updater
 - directionToBuilding
 - Item actually has code now, not just a type
+- building works by now (unsure when it worked for the first time, but here for sure)
+
+
+23/03/25
+- finished Updating input
+- update all inputs in a chain of buildings, instead of just the ones directly around the change (one error is still around because it wont be updated around corners)
+- all sprites for buildings have been added, and loaded (bless my old sprite loading method, it still works perfectly without any change (aside from turning it on))
+- implemented sprite rotation
+- multiple buttons for all buildings (created dynamically)
+
+24/03/25
+- fixed bugs (building multiple buildings on one tile, holding multiple buildings at once)
+- delete buildings
+- wrote some things into rezi
+- added a lot more text to devlog, despire not having a proper clue what happened when lol

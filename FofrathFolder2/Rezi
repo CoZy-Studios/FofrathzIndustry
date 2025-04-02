@@ -1,0 +1,34 @@
+Reflection
+
+problems:
+- School PCs are trash, they can neither handle the game smoothly, nor is their java version up to date, leading to frequent errors (".getFirst()" doesnt exist for school computers)
+- Random small logic errors that take hours to fix (normal coding experience)
+- UI related code is very janky (ask SzyZuu for more information)
+- keyhandlers randomly not working 
+- random map generation has a chance to create a map that is impossible to play (no ores)
+- random merge errors (half of the devlog dissapeared, as well as a lot of code)
+- devlog shouldve been kept better
+
+what went well
+- logic code having the tendency to work on the first try (like OnChange) thanks to planning ahead
+- good structure for file / sprite handling -> could be improved by using folders, especially in the src/main/java/com/cozystudios/fofrathzindustry
+- creation of a custom Logger instead of system.out.printLn(), for improved debugging potential (filterable by class, easily disableable to prevent the clogging of the console, without losing any capability that print has) 
+- random map generation
+- good limiting of the scope for the game, no crunch was necessary to get our product to the state it is in right now
+- few comments in code, only to make certain things easier to see without bloating the code
+- overall little bloat
+- good centralisation of code, keeping most logic outside of the frequently instantiated objects
+
+ideas for future projects:
+- create a bot / script that automatically writes a devlog based on comit messages, maintaining the devlog is a time waste, but for note taking, future references and a good commit farm (same with rezi)
+- use a better structure for the files, to have scripts and sprites grouped better (compare to other CozyStudios project (infectism), even i hate to admit it but MC forces pretty good structure)
+- use laptops / remote desktops more often instead of school pcs, because holy sh*t they're horrendous to use
+- taking more breaks within the coding sessions, as it‘s proven to help with thinking of solutions for problems
+- work more often / regularly on the project (my commit schedule is awful)
+- commit more often, to have more possibilites for rollbacks (and more stats)
+- better commit messages (looking at you SzyZuu, tho tbf im not perfect either)
+- planning, not just better planning but planning overall, since some issues were tackled without a (written/sketched) plan
+- get / make some plug-in to enforce conventional commits / indentation / cases / syntax (the amount of white spaces, and the difference in bracket placement is annoying, and makes the code less comprehensible)
+
+was man dazu gelernt hat:
+ausschreiben

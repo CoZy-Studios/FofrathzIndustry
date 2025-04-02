@@ -17,7 +17,7 @@ public class Logger {
         //addClassToLogger(Building.class);
         //addClassToLogger(KeyHandler.class);
         addClassToLogger(GamePanel.class);
-        addClassToLogger(Grid.class);
+        //addClassToLogger(Grid.class);
     }
 
     public static void addClassToLogger(Class loggedClass)
