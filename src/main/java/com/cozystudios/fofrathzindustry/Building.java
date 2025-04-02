@@ -145,7 +145,12 @@ public class Building
             switch (input.get(0)._itemType) {
                 case None -> {}
                 case Copper -> {g2.drawImage(copperOreItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case Iron -> {}
+                case IronIngot -> {}
                 case Coal -> {g2.drawImage(coalItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case CopperIngot -> {g2.drawImage(copperIngotItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case CopperWire -> {g2.drawImage(copperWireItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case Steel -> {}
             }
 
         }
