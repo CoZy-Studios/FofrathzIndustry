@@ -27,13 +27,28 @@ public class KeyHandler implements KeyListener {
             gamePanel.rotateRight.set(1);
         }
 
-        if(e.getKeyCode() == KeyEvent.VK_D){
+        if(e.getKeyCode() == KeyEvent.VK_R){
             gamePanel.deletePressed++;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        Logger.log(this.getClass(), "Key released");
+        if(e.getKeyCode() == KeyEvent.VK_W){
+            gamePanel.MoveMapY(false);
+        }
 
+        if(e.getKeyCode() == KeyEvent.VK_S){
+            gamePanel.MoveMapY(true);
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_D){
+            gamePanel.MoveMapX(true);
+        }
+
+        if(e.getKeyCode() == KeyEvent.VK_A){
+            gamePanel.MoveMapX(false);
+        }
     }
 }

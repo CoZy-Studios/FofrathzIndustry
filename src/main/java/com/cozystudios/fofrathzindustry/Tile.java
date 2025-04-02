@@ -12,8 +12,7 @@ public class Tile
     public void initialize(TileType type, Graphics2D g2, int gridPositionX, int gridPositionY)
     {
         tileType = type;
-        if(tileColor == Color.white)
-        {
+
             switch(tileType)
             {
                 case Grass -> tileColor = grassRandomizer();
@@ -21,7 +20,7 @@ public class Tile
                 case Copper -> tileColor = copperRandomizer();
                 default -> g2.setColor(Color.WHITE);
             }
-        }
+
 
         Logger.log(this.getClass(), "Initializing tile: " + tileType );
         drawTile(g2 ,gridPositionX ,gridPositionY);

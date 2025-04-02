@@ -22,8 +22,8 @@ public class GamePanel extends JPanel implements Runnable
     public int deletePressed = 0;
     public AtomicInteger rotateLeft = new AtomicInteger(0);
     public AtomicInteger rotateRight = new AtomicInteger(0);
-
     public final AtomicBoolean placingBuilding = new AtomicBoolean(false);
+
     private List<Building> buildingsToUpdate = new ArrayList<Building>();
 
     public GamePanel(Grid pGrid)
@@ -39,6 +39,26 @@ public class GamePanel extends JPanel implements Runnable
     {
         gameThread = new Thread(this);
         gameThread.run();
+    }
+
+    public void MoveMapY(boolean down){
+        if(down)
+            grid.YMove++;
+        else
+            grid.YMove--;
+
+        repaint();
+        Logger.log(this.getClass(), "Added YMove");
+    }
+
+    public void MoveMapX(boolean left){
+        if(left)
+            grid.XMove++;
+        else
+            grid.XMove--;
+
+        repaint();
+        Logger.log(this.getClass(), "Added XMove");
     }
 
     public void PlacingBuilding(String buildingName)

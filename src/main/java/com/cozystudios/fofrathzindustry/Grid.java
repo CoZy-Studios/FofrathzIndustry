@@ -11,6 +11,8 @@ public class Grid
     static int cellSize = 34;
     int width = columns * cellSize;
     int height = rows * cellSize;
+    public int YMove = 0;
+    public int XMove = 0;
     public Tile[][] localGrid = new Tile[columns + 1][rows + 1]; // +1, cos  +0 = 0-15, so +1 = 0-16 (we want it to go from 1-16)
     private List<Building> _buildings;
 
@@ -91,6 +93,7 @@ public class Grid
 
     public void drawGrid(Graphics2D g2)
     {
+        Logger.log(this.getClass(), "Redrawing Grid");
         for(int i = 0; i <= rows; i++)
         {
             for(int j = 0; j <= columns; j++)
@@ -100,7 +103,7 @@ public class Grid
 
                 if(0 < i && i <= rows && 0 < j && j <= columns)
                 {
-                    float noiseValue = mapNoise.GetNoise(j * 50, i * 50);
+                    float noiseValue = mapNoise.GetNoise((j + XMove) * 50, (i + YMove) * 50);
                     if(noiseValue > 0.95)
                         localGrid[j][i].initialize(TileType.Coal, g2, j, i);
                     else if(noiseValue < -0.96)
