@@ -12,7 +12,13 @@ import java.util.Objects;
 public class Building
 {
     private final int cellSize = Grid.cellSize;
+
     private BufferedImage buildingImage;
+    private BufferedImage copperOreItemImage;
+    private BufferedImage  coalItemImage;
+    private BufferedImage copperIngotItemImage;
+    private BufferedImage copperWireItemImage;
+
     public BuildingType buildingType;
     public BuildingDirection direction;
     private TileType _standingOnTile;
@@ -24,6 +30,7 @@ public class Building
 
     public float inputRate = 0;
     public float outputRate = 0;
+
 
     public enum BuildingDirection
     {
@@ -106,6 +113,11 @@ public class Building
         try
         {
             buildingImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Building_"+buildingType.toString()+ "_" + direction.toString() + ".png")));
+            coalItemImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/coalItem.png")));
+            copperOreItemImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/copperOreItem.png")));
+            copperIngotItemImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/copperIngotItem.png")));
+            copperWireItemImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/copperWireItem.png")));
+
         }
         catch (IOException ignored)
         {
@@ -125,7 +137,23 @@ public class Building
         //g2.drawString(buildingType.toString(), Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY) + cellSize);
         Logger.log(this.getClass(), "Drawing building: " + buildingType);
 
+
         g2.drawImage(buildingImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);
+
+        if(!input.isEmpty())
+        {
+            switch (input.get(0)._itemType) {
+                case None -> {}
+                case Copper -> {g2.drawImage(copperOreItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case Iron -> {}
+                case IronIngot -> {}
+                case Coal -> {g2.drawImage(coalItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case CopperIngot -> {g2.drawImage(copperIngotItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case CopperWire -> {g2.drawImage(copperWireItemImage, Grid.GridToCoordinate(positionX), Grid.GridToCoordinate(positionY), cellSize, cellSize, null);}
+                case Steel -> {}
+            }
+
+        }
 
     }
 
