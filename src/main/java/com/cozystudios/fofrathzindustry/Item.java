@@ -26,7 +26,11 @@ public class Item
         None,
         //Stone,
         Copper,
-        //Iron,
-        Coal
+        Iron,
+        IronIngot,
+        Coal,
+        CopperIngot,
+        CopperWire,
+        Steel
     }
 }
