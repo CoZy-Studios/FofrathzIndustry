@@ -153,11 +153,11 @@ public class GamePanel extends JPanel implements Runnable
         while (updateListIterator.hasNext())
         {
             Building building = updateListIterator.next();
+            clearBuildingChain(building);
             updateBuildingChain(building);
         }
         buildingsToUpdate.clear();
     }
-
 
     private void updateBuildingChain(Building currentBuilding)
     {
@@ -166,8 +166,25 @@ public class GamePanel extends JPanel implements Runnable
         if (nextBuilding != null)
         {
             nextBuilding.UpdateInput((Item) currentBuilding.getOutput(), currentBuilding.outputRate);
-            Logger.log(this.getClass(), "Building: " + currentBuilding.buildingType.toString() + " transferred item to building: " + nextBuilding.buildingType.toString() + " | Item: " + currentBuilding.getOutput().getItemType());
+            Logger.log(this.getClass(), "Building: " + currentBuilding.buildingType.toString() +
+                    " transferred item to building: " + nextBuilding.buildingType.toString() +
+                    " | Item: " + currentBuilding.getOutput().getItemType());
             updateBuildingChain(nextBuilding);
+        }
+    }
+
+    private void clearBuildingChain(Building currentBuilding)
+    {
+        Building.BuildingDirection originalDirection = currentBuilding.direction;
+
+        for (Building.BuildingDirection dir : Building.BuildingDirection.values())
+        {
+            Building nextBuilding = grid.DirectionToBuilding(dir, currentBuilding.positionX, currentBuilding.positionY);
+            if (nextBuilding != null && dir != originalDirection)
+            {
+                nextBuilding.UpdateInput(null, 0);
+                clearBuildingChain(nextBuilding);
+            }
         }
     }
 
