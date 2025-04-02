@@ -68,13 +68,35 @@ public class Building
                 }
                 else return null;
             }
-            case Manufacturer -> {/*TODO make manufacturer magic*/ return null;}
+            case Manufacturer -> {
+                if(input.size() > 1){
+                    int found = 0;
+                    for(Item item : input){
+                        if(item.getItemType() == Item.ItemType.Iron || item.getItemType() == Item.ItemType.Coal)
+                            found = 1;
+                        if(item.getItemType() == Item.ItemType.Coal || item.getItemType() == Item.ItemType.Iron){
+                            if(found == 1){
+                                return new Item(Item.ItemType.Steel);
+                            }
+                        }
+                    }
+                }
+                if(input.size() > 0){
+                    switch(input.get(0).getItemType()){
+                        case Copper -> { return new Item(Item.ItemType.CopperIngot); }
+                        case CopperIngot -> {return new Item(Item.ItemType.CopperWire);}
+                        default -> {return null;}
+                    }
+                }
+            }
             default ->
             {
                 if(!input.isEmpty()) return input.get(0);
                 else return null;
             } //Belt is default
         }
+
+        return null;
     }
 
 
