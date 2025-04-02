@@ -21,8 +21,10 @@ public class UiPanel extends JPanel {
 
         /*      MIDDLE THIRD        */
         JPanel middlePanel = new JPanel();
+        JLabel label = new JLabel("<html>Tutorial: <br> Orange = Kupfer, Schwarz = Kohle <br> Mit den buttons unten können Gebäude platziert werden <br> Beim platzieren kann mit E und Q rotiert werden <br> Mit D werden Gebäude unter der Muas gelöscht</html>");
+        middlePanel.add(label);
         middlePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        add(middlePanel);
+        add(label);
 
         /*      BOTTOM THIRD        */
         JPanel buildingPanel = new JPanel();
